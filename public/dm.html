@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الرسائل الخاصة</title>
+  <!-- استخدم المسار الصحيح لملف التنسيقات داخل مجلد assets -->
+  <link rel="stylesheet" href="../assets/style.css">
+  <!-- مكتبة Supabase (نسخة مضغوطة متوافقة مع جميع الصفحات) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+  <script src="../assets/supabase-config.js"></script>
+  <!-- تحميل utils.js كسكربت عادي بدلاً من module لتجنب خطأ Unexpected token export -->
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/security.js"></script>
+  <script src="../assets/supabase-api.js"></script>
+  <script src="../assets/realtime.js"></script>
+  <script src="../assets/ui.js"></script>
+</head>
+<body class="bg-gray-900 text-white h-screen flex flex-col">
+  <header class="p-4 bg-gray-800 flex justify-between items-center">
+    <h1 class="text-xl font-bold">الرسائل الخاصة</h1>
+    <div id="currentDMUser" class="text-sm opacity-70"></div>
+    <button id="dmSignOutButton" class="btn-custom">تسجيل خروج</button>
+  </header>
+  <main class="flex flex-1 overflow-hidden">
+    <!-- قائمة المحادثات -->
+    <aside class="w-64 bg-gray-800 bg-opacity-40 p-2 overflow-y-auto hidden md:block" id="dmSidebar">
+      <div class="mb-2">
+        <input type="text" id="dmSearchInput" placeholder="ابحث عن مستخدم..." class="w-full p-2 rounded bg-gray-700 text-white">
+      </div>
+      <div id="dmConversationsList" class="space-y-2"></div>
+      <div id="dmSearchResults" class="space-y-2 mt-4"></div>
+    </aside>
+    <!-- شاشة الرسائل -->
+    <section class="flex-1 flex flex-col">
+      <div id="dmMessagesContainer" class="flex-1 overflow-y-auto p-4 space-y-2"></div>
+      <form id="dmMessageForm" class="p-2 bg-gray-800 flex gap-2">
+        <input type="text" id="dmMessageInput" class="flex-1 p-2 rounded bg-gray-700 text-white" placeholder="اكتب رسالتك...">
+        <button type="submit" class="btn-custom">إرسال</button>
+      </form>
+    </section>
+  </main>
+  <script src="../assets/dm.js"></script>
+</body>
+</html>

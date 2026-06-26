@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز مجتمع أيهم</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- تحميل الإعدادات لتطبيق الثيم والألوان عبر localStorage -->
+  <script src="../assets/load-settings.js"></script>
+</head>
+<body>
+  <header class="p-8 text-center space-y-4">
+    <h1 class="text-4xl font-extrabold">مركز مجتمع أيهم</h1>
+    <p class="text-gray-300 max-w-xl mx-auto">منصة شاملة للتواصل وإدارة المشاريع والمحتوى، تجمع بين الدردشة، المنشورات، المهام، مركز المعرفة، الدعم، والإنجازات، في واجهة واحدة أنيقة وسهلة الاستخدام.</p>
+  </header>
+  <main class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <!-- بطاقة تسجيل الدخول -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">الانضمام إلى المجتمع</h2>
+      <p class="mb-4 text-gray-300">قم بإنشاء حساب أو تسجيل الدخول لبدء تجربتك.</p>
+      <a href="login.html" class="btn-custom">تسجيل الدخول / حساب جديد</a>
+    </div>
+    <!-- بطاقة الدردشة -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">الدردشة والغرف</h2>
+      <p class="mb-4 text-gray-300">انضم إلى غرف متعددة وتحدث مع الأصدقاء، وتابع الرسائل في الوقت الحقيقي.</p>
+      <a href="chat.html" class="btn-custom">فتح الدردشة</a>
+    </div>
+    <!-- بطاقة المنشورات -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">المنشورات</h2>
+      <p class="mb-4 text-gray-300">شارك أفكارك في موجز الأخبار، شاهد تعليقات وتفاعلات الآخرين.</p>
+      <a href="feed.html" class="btn-custom">عرض المنشورات</a>
+    </div>
+    <!-- بطاقة المهام والمشاريع -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">المهام والمشاريع</h2>
+      <p class="mb-4 text-gray-300">خطط وتابع سير عملك أو عمل فريقك بأدوات تنظيم متطورة.</p>
+      <a href="projects.html" class="btn-custom">إدارة المشاريع</a>
+    </div>
+    <!-- بطاقة مركز المعرفة -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">مركز المعرفة</h2>
+      <p class="mb-4 text-gray-300">استكشف المقالات والموارد التعليمية، أو أضف محتواك الخاص.</p>
+      <a href="knowledge.html" class="btn-custom">زيارة مركز المعرفة</a>
+    </div>
+    <!-- بطاقة الدعم -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">الدعم والتذاكر</h2>
+      <p class="mb-4 text-gray-300">اطلب المساعدة أو راجع تذاكرك وابق على اطلاع على حالتها.</p>
+      <a href="support.html" class="btn-custom">فتح مركز الدعم</a>
+    </div>
+    <!-- بطاقة الإنجازات واللوحة -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">الإنجازات واللوحة</h2>
+      <p class="mb-4 text-gray-300">شاهد ترتيب المستخدمين وحقق إنجازاتك.</p>
+      <a href="leaderboard.html" class="btn-custom">لوحة الصدارة</a>
+    </div>
+    <!-- بطاقة البحث والإشعارات -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">البحث والإشعارات</h2>
+      <p class="mb-4 text-gray-300">ابحث في كل المحتوى، وتابع إشعاراتك بسهولة.</p>
+      <div class="flex gap-4">
+        <a href="search.html" class="btn-custom">البحث</a>
+        <a href="notifications.html" class="btn-custom">الإشعارات</a>
+      </div>
+    </div>
+    <!-- بطاقة لوحة المالك -->
+    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
+      <h2 class="text-xl font-bold mb-2">لوحة المالك</h2>
+      <p class="mb-4 text-gray-300">إدارة المجتمع والتحكم في جميع أقسام المنصة من مكان واحد.</p>
+      <a href="owner.html" class="btn-custom">الانتقال للوحة المالك</a>
+    </div>
+  </main>
+</body>
+</html>

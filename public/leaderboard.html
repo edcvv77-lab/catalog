@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة الصدارة</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/load-settings.js"></script>
+</head>
+<body>
+  <header class="p-4 border-b border-gray-700 flex items-center justify-between">
+    <h1 class="text-3xl font-bold">لوحة الصدارة</h1>
+    <a href="chat.html" class="btn-custom">الدردشة</a>
+  </header>
+  <main class="p-4 space-y-4" id="leaderboardContainer">
+    <!-- سيتم تحميل أعلى المستخدمين والإنجازات عبر leaderboard.js أو notifications.js -->
+  </main>
+  <!-- مكتبات Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+  <script src="../assets/supabase-config.js"></script>
+  <!-- تحميل utils.js كسكربت عادي بدلاً من module -->
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/supabase-api.js"></script>
+  <script src="../assets/ui.js"></script>
+  <script src="../assets/notifications.js"></script>
+  <script src="../assets/leaderboard.js"></script>
+</body>
+</html>

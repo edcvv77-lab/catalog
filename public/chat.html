@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة الدردشة المتقدمة</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- تحميل إعدادات الثيم -->
+  <script src="../assets/load-settings.js"></script>
+</head>
+<body>
+  <div id="chatContainer" class="flex flex-col md:flex-row h-screen">
+    <!-- لوحة الغرف -->
+    <aside id="roomSidebar" class="md:w-64 w-full md:static fixed top-0 right-0 h-full bg-opacity-30 backdrop-blur-md p-4 overflow-y-auto transition-transform transform md:translate-x-0 translate-x-full z-20">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">الغرف</h2>
+        <button id="sidebarToggle" class="btn-custom md:hidden">☰</button>
+      </div>
+      <input id="roomSearchInput" type="text" placeholder="بحث عن غرفة..." class="mb-3 p-2 rounded w-full" />
+      <div id="roomsList" class="space-y-2"></div>
+      <button id="createRoomBtn" class="btn-custom w-full mt-4">إنشاء غرفة</button>
+    </aside>
+    <!-- منطقة الدردشة -->
+    <main id="chatMain" class="flex-1 flex flex-col bg-opacity-20 backdrop-blur-md">
+      <header class="flex justify-between items-center p-4 border-b border-gray-700">
+        <div>
+          <h2 id="currentRoomName" class="text-xl font-semibold">اختر غرفة</h2>
+          <small id="participantsCount" class="text-sm opacity-80">0 مستخدمين</small>
+        </div>
+        <div class="flex items-center gap-2">
+          مرحباً، <span id="currentUsername"></span>
+          <a href="dm.html" class="btn-custom px-2 py-1 text-sm">رسائل خاصة</a>
+          <button id="signOutButton" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">خروج</button>
+        </div>
+      </header>
+      <!-- قسم الرسائل المثبتة -->
+      <section id="pinnedMessagesSection" class="p-2 space-y-2 hidden">
+        <h3 class="font-semibold mb-2">الرسائل المثبتة</h3>
+        <div id="pinnedMessagesContainer" class="space-y-1"></div>
+      </section>
+      <section id="messagesContainer" class="flex-1 p-4 overflow-y-auto space-y-4"></section>
+      <form id="messageForm" class="p-4 flex items-center gap-2 border-t border-gray-700">
+        <input id="messageInput" type="text" class="flex-1 p-3 rounded" placeholder="اكتب رسالة..." autocomplete="off" />
+        <button type="submit" class="btn-custom">إرسال</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- حوار إنشاء الغرفة -->
+  <div id="createRoomModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30">
+    <div class="bg-gray-800 p-6 rounded shadow-lg w-full max-w-md">
+      <h3 class="text-lg font-semibold mb-4">إنشاء غرفة جديدة</h3>
+      <label class="block mb-2" for="newRoomNameInput">اسم الغرفة</label>
+      <input id="newRoomNameInput" type="text" class="w-full p-2 rounded mb-3" placeholder="اسم الغرفة" />
+      <label class="block mb-2" for="newRoomTypeSelect">نوع الغرفة</label>
+      <select id="newRoomTypeSelect" class="w-full p-2 rounded mb-3">
+        <option value="public">عامة</option>
+        <option value="private">خاصة</option>
+        <option value="secret">سرية</option>
+      </select>
+      <div class="flex justify-end gap-2">
+        <button id="cancelCreateRoom" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">إلغاء</button>
+        <button id="confirmCreateRoom" class="btn-custom">إنشاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- حوار تعديل الرسالة -->
+  <div id="editMessageModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30">
+    <div class="bg-gray-800 p-6 rounded shadow-lg w-full max-w-md">
+      <h3 class="text-lg font-semibold mb-4">تعديل الرسالة</h3>
+      <textarea id="editMessageInput" class="w-full p-2 rounded mb-3" rows="4"></textarea>
+      <div class="flex justify-end gap-2">
+        <button id="cancelEditMessage" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">إلغاء</button>
+        <button id="confirmEditMessage" class="btn-custom">حفظ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast للإشعارات البسيطة -->
+  <div id="toastContainer" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 space-y-2 z-50"></div>
+
+  <!-- سكربتات -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+  <script src="../assets/supabase-config.js"></script>
+  <!-- تحميل utils.js كسكربت عادي بدلاً من module -->
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/supabase-api.js"></script>
+  <script src="../assets/realtime.js"></script>
+  <script src="../assets/security.js"></script>
+  <script src="../assets/ui.js"></script>
+  <script src="../assets/chat.js"></script>
+  <!-- security.js و ui.js يمكن إضافتها لاحقاً عند تنفيذها -->
+</body>
+</html>

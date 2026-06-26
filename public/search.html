@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>البحث في المجتمع</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/load-settings.js"></script>
+</head>
+<body>
+  <header class="p-4 border-b border-gray-700 flex items-center justify-between">
+    <h1 class="text-3xl font-bold">البحث</h1>
+    <a href="chat.html" class="btn-custom">الدردشة</a>
+  </header>
+  <main class="p-4 space-y-4">
+    <div class="mb-4">
+      <input id="searchInput" type="text" class="w-full p-2 rounded bg-gray-700 text-gray-100" placeholder="اكتب كلمة البحث...">
+    </div>
+    <div id="searchResults" class="space-y-4">
+      <!-- ستعرض النتائج هنا بواسطة search.js -->
+    </div>
+  </main>
+  <!-- مكتبات Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+  <script src="../assets/supabase-config.js"></script>
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/supabase-api.js"></script>
+  <script src="../assets/ui.js"></script>
+  <script src="../assets/search.js"></script>
+</body>
+</html>

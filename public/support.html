@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز الدعم</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/load-settings.js"></script>
+</head>
+<body>
+  <header class="p-4 border-b border-gray-700 flex items-center justify-between">
+    <h1 class="text-3xl font-bold">مركز الدعم</h1>
+    <div class="flex gap-4">
+      <button id="newTicketBtn" class="btn-custom">إنشاء تذكرة</button>
+      <a href="chat.html" class="btn-custom">الدردشة</a>
+    </div>
+  </header>
+  <main class="p-4 space-y-4" id="ticketsContainer">
+    <!-- سيتم عرض التذاكر عبر support.js -->
+  </main>
+  <!-- نافذة إنشاء تذكرة -->
+  <div id="ticketModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-gray-800 p-6 rounded-lg w-11/12 max-w-lg overflow-auto max-h-screen">
+      <h2 class="text-xl font-bold mb-4">تذكرة دعم جديدة</h2>
+      <form id="ticketForm" class="space-y-4">
+        <label for="ticketType" class="block">نوع المشكلة</label>
+        <select id="ticketType" class="w-full p-2 rounded bg-gray-700 text-gray-100">
+          <option value="account">حساب</option>
+          <option value="chat">دردشة</option>
+          <option value="report">بلاغ</option>
+          <option value="bug">خلل</option>
+          <option value="suggestion">اقتراح</option>
+          <option value="other">أخرى</option>
+        </select>
+        <input id="ticketTitle" type="text" class="w-full p-2 rounded bg-gray-700 text-gray-100" placeholder="العنوان" maxlength="150" required>
+        <textarea id="ticketDescription" rows="4" class="w-full p-2 rounded bg-gray-700 text-gray-100" placeholder="وصف المشكلة" maxlength="1000" required></textarea>
+        <div class="flex gap-4 justify-end">
+          <button type="button" id="cancelTicketBtn" class="btn-custom bg-gray-600">إلغاء</button>
+          <button type="submit" class="btn-custom">إرسال</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- مكتبات Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+  <script src="../assets/supabase-config.js"></script>
+  <script src="../assets/utils.js"></script>
+  <script src="../assets/supabase-api.js"></script>
+  <script src="../assets/ui.js"></script>
+  <script src="../assets/support.js"></script>
+</body>
+</html>
