@@ -105,3 +105,245 @@ header {
     height: 60vh;
   }
 }
+/* =========================================================
+   MOBILE FIRST EMERGENCY PATCH - Aiham V4
+   يجعل كل صفحات المشروع مناسبة للجوال
+   ========================================================= */
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img, video, canvas, table {
+  max-width: 100%;
+}
+
+input, textarea, select, button {
+  max-width: 100%;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  body {
+    width: 100%;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  main,
+  .container,
+  .page,
+  .page-container,
+  .app,
+  .app-shell,
+  .layout,
+  .dashboard,
+  .dashboard-layout,
+  .owner-layout,
+  .admin-layout,
+  .chat-layout,
+  .chat-container,
+  .content,
+  .main-content,
+  .panel,
+  .card,
+  .section,
+  .feed-layout,
+  .profile-layout,
+  .projects-layout,
+  .tasks-layout,
+  .support-layout,
+  .knowledge-layout {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    display: block !important;
+    grid-template-columns: 1fr !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .sidebar,
+  .side-panel,
+  .rooms-sidebar,
+  .rooms-panel,
+  .users-sidebar,
+  .owner-sidebar,
+  .admin-sidebar,
+  aside {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin-bottom: 12px !important;
+  }
+
+  .messages,
+  .messages-panel,
+  .chat-main,
+  .chat-window,
+  .conversation,
+  .room-view {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+  }
+
+  .topbar,
+  .navbar,
+  .header,
+  header {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+  }
+
+  .nav-links,
+  .tabs,
+  .actions,
+  .toolbar,
+  .button-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .nav-links a,
+  .tabs button,
+  .actions button,
+  .toolbar button,
+  button,
+  .btn {
+    min-height: 44px !important;
+    border-radius: 12px !important;
+  }
+
+  form,
+  .form,
+  .login-card,
+  .auth-card,
+  .create-room,
+  .composer,
+  .message-composer {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100% !important;
+    min-height: 44px !important;
+  }
+
+  textarea {
+    min-height: 90px !important;
+  }
+
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  table {
+    overflow-x: auto !important;
+  }
+
+  tr {
+    margin-bottom: 12px !important;
+    padding: 10px !important;
+    border-radius: 12px !important;
+    background: rgba(255,255,255,0.04) !important;
+  }
+
+  .grid,
+  .cards,
+  .stats-grid,
+  .dashboard-grid,
+  .feature-grid,
+  .room-grid,
+  .post-grid,
+  .project-grid,
+  .task-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .modal,
+  .dialog,
+  .popup {
+    width: calc(100% - 24px) !important;
+    max-width: calc(100% - 24px) !important;
+    left: 12px !important;
+    right: 12px !important;
+  }
+
+  h1 {
+    font-size: 28px !important;
+    line-height: 1.25 !important;
+  }
+
+  h2 {
+    font-size: 22px !important;
+    line-height: 1.3 !important;
+  }
+
+  h3 {
+    font-size: 18px !important;
+  }
+
+  .message,
+  .bubble,
+  .post-card,
+  .ticket-card,
+  .project-card,
+  .task-card,
+  .article-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    word-break: break-word !important;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 15px !important;
+  }
+
+  .container,
+  .page-container,
+  .card,
+  .panel {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  button,
+  .btn {
+    width: 100%;
+  }
+}
