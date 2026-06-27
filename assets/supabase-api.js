@@ -43,7 +43,23 @@
 
   // إنشاء غرفة جديدة
   async function createRoom({ name, slug, description = '', type = 'public' }) {
-    const { data, error } = await supabase.from('rooms').insert([{ name, slug, description, type }]).select('*').single();
+    const userId = (await supabase.auth.getUser()).data.user?.id;
+    if (!userId) throw new Error('No user');
+
+    const payload = {
+      name,
+      slug,
+      description,
+      type,
+      owner_id: userId
+    };
+
+    const { data, error } = await supabase
+      .from('rooms')
+      .insert([payload])
+      .select('*')
+      .single();
+
     if (error) throw error;
     return data;
   }
@@ -60,13 +76,33 @@
 
   // الانضمام إلى غرفة
   async function joinRoom(roomId) {
+    if (!roomId) throw new Error('No room selected');
+
     const userId = (await supabase.auth.getUser()).data.user?.id;
     if (!userId) throw new Error('No user');
+
+    // لا نستخدم upsert هنا لأن upsert قد يتحول إلى update ويفشل مع RLS للمستخدم العادي
+    const { data: existing, error: existingError } = await supabase
+      .from('room_members')
+      .select('*')
+      .eq('room_id', roomId)
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (existingError) throw existingError;
+    if (existing) return existing;
+
     const { data, error } = await supabase
       .from('room_members')
-      .upsert({ room_id: roomId, user_id: userId }, { onConflict: 'room_id,user_id' })
+      .insert({
+        room_id: roomId,
+        user_id: userId,
+        role: 'member',
+        muted_until: null
+      })
       .select('*')
       .single();
+
     if (error) throw error;
     return data;
   }
@@ -95,6 +131,11 @@
   async function sendMessage(roomId, content, { replyTo = null, type = 'text' } = {}) {
     const userId = (await supabase.auth.getUser()).data.user?.id;
     if (!userId) throw new Error('No user');
+    if (!roomId) throw new Error('No room selected');
+
+    content = String(content || '').trim();
+    if (!content) throw new Error('Empty message');
+
     const message = {
       room_id: roomId,
       sender_id: userId,

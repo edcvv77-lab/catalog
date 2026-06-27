@@ -117,6 +117,11 @@
           });
           roomsList.appendChild(li);
         }
+
+        // اختيار أول غرفة تلقائيًا حتى لا تبقى الصفحة على "اختر غرفة"
+        if (!currentRoomId && rooms.length > 0) {
+          await joinAndSelectRoom(rooms[0]);
+        }
       } catch (error) {
         console.error('Error loading rooms:', error);
         showToast('حدث خطأ أثناء جلب الغرف');
@@ -134,7 +139,7 @@
         console.error('Error joining room:', error);
         showToast('لا يمكنك الانضمام إلى هذه الغرفة');
       }
-      selectRoom(room);
+      await selectRoom(room);
     }
 
     /**
@@ -493,6 +498,12 @@
     // Submit message form
     messageForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      if (!currentRoomId) {
+        showToast('اختر غرفة أولًا', 'warning');
+        return;
+      }
+
       const text = messageInput.value;
       if (security && typeof security.checkMessage === 'function') {
         const checkRes = security.checkMessage(text, ownerSettings, currentRoomDetails || {});
