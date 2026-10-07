@@ -100,7 +100,7 @@
     </div>
     <nav class="nav">
       <div class="wrap">
-        <a class="active" href="#">الرئيسية</a><a href="#categories">العناية بالوجه</a><a href="#categories">العناية بالبشرة</a><a href="#categories">العناية بالشعر</a><a href="#categories">الأعشاب والخلطات</a><a href="#products">العروض</a><a href="#about">من نحن</a>
+        <a class="active" href="index.html">الرئيسية</a><a href="categories.html">الأقسام</a><a href="categories.html?cat=face">العناية بالوجه</a><a href="categories.html?cat=skin">العناية بالبشرة</a><a href="categories.html?cat=hair">العناية بالشعر</a><a href="categories.html?cat=herbs">الأعشاب والخلطات</a><a href="favorites.html">المفضلة</a>
       </div>
     </nav>
   </header>
@@ -132,10 +132,10 @@
       <div class="wrap">
         <div class="section-head"><div><h3>الأقسام الرئيسية</h3><p>اختاري القسم المناسب لاحتياجك</p></div><button class="link-btn" data-filter="all">عرض الكل ←</button></div>
         <div class="categories">
-          <button class="cat" data-filter="face"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=700&q=82" alt="العناية بالوجه"><span>العناية بالوجه<small>ماسكات وروتين يومي</small></span></button>
-          <button class="cat" data-filter="skin"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=82" alt="العناية بالبشرة"><span>العناية بالبشرة<small>تفتيح وترطيب وعناية</small></span></button>
-          <button class="cat" data-filter="hair"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=82" alt="العناية بالشعر"><span>العناية بالشعر<small>زيوت وخلطات للشعر</small></span></button>
-          <button class="cat" data-filter="herbs"><img src="https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=700&q=82" alt="الأعشاب والخلطات"><span>الأعشاب والخلطات<small>خلطات مختارة بعناية</small></span></button>
+          <button class="cat" onclick="location.href='categories.html?cat=face'"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=700&q=82" alt="العناية بالوجه"><span>العناية بالوجه<small>ماسكات وروتين يومي</small></span></button>
+          <button class="cat" onclick="location.href='categories.html?cat=skin'"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=82" alt="العناية بالبشرة"><span>العناية بالبشرة<small>تفتيح وترطيب وعناية</small></span></button>
+          <button class="cat" onclick="location.href='categories.html?cat=hair'"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=82" alt="العناية بالشعر"><span>العناية بالشعر<small>زيوت وخلطات للشعر</small></span></button>
+          <button class="cat" onclick="location.href='categories.html?cat=herbs'"><img src="https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=700&q=82" alt="الأعشاب والخلطات"><span>الأعشاب والخلطات<small>خلطات مختارة بعناية</small></span></button>
         </div>
       </div>
     </section>
@@ -167,10 +167,10 @@
   </a>
 
   <nav class="bottom-nav">
-    <button class="active" onclick="scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 9-8 9 8"/><path d="M5 10v11h14V10"/><path d="M9 21v-7h6v7"/></svg>الرئيسية</button>
-    <button onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>الأقسام</button>
-    <button id="cartBottom"><span class="badge cart-count">0</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>السلة</button>
-    <button id="favBottom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>المفضلة</button>
+    <a class="active" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 9-8 9 8"/><path d="M5 10v11h14V10"/><path d="M9 21v-7h6v7"/></svg>الرئيسية</a>
+    <a href="categories.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>الأقسام</a>
+    <a href="cart.html"><span class="badge cart-count">0</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>السلة</a>
+    <a href="favorites.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>المفضلة</a>
     <button onclick="showToast('الحساب وتسجيل الدخول سنضيفهما في المرحلة التالية')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>حسابي</button>
   </nav>
 
