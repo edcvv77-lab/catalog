@@ -1,0 +1,15 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الأقسام | متجر أم تركي</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../assets/store-shared.css"></head><body>
+<header class="site-header"><div class="wrap header-row"><a class="back" href="index.html">←</a><a class="brand" href="index.html"><span class="leaf">🌿</span><span>متجر أم تركي</span></a><a class="head-action" href="cart.html">🛒<span class="badge cart-count">0</span></a></div></header>
+<main class="wrap"><section class="page-hero"><h1>تسوقي حسب القسم</h1><p>اختاري القسم المناسب، ثم شاهدي المنتجات التابعة له في صفحة مرتبة ومستقلة.</p></section>
+<div class="grid">
+<a class="category" href="?cat=face"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=82"><div class="category-body"><h3>العناية بالوجه</h3><p>ماسكات ومنتجات روتين الوجه.</p></div></a>
+<a class="category" href="?cat=skin"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=82"><div class="category-body"><h3>العناية بالبشرة</h3><p>منتجات العناية والترطيب والتفتيح.</p></div></a>
+<a class="category" href="?cat=hair"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=800&q=82"><div class="category-body"><h3>العناية بالشعر</h3><p>زيوت وخلطات وروتين الشعر.</p></div></a>
+<a class="category" href="?cat=herbs"><img src="https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=800&q=82"><div class="category-body"><h3>الأعشاب والخلطات</h3><p>أعشاب وخلطات مختارة.</p></div></a>
+</div>
+<section class="page-hero"><h1 id="productsTitle">كل المنتجات</h1></section><div class="products" id="gridProducts"></div></main>
+<nav class="bottom"><a href="index.html"><span>⌂</span>الرئيسية</a><a class="active" href="categories.html"><span>▦</span>الأقسام</a><a href="favorites.html"><span>♡</span>المفضلة</a><a href="cart.html"><span>🛒</span>السلة</a></nav>
+<script src="../assets/store-data.js"></script><script>
+const params=new URLSearchParams(location.search),cat=params.get("cat")||"all";const names={face:"العناية بالوجه",skin:"العناية بالبشرة",hair:"العناية بالشعر",herbs:"الأعشاب والخلطات",all:"كل المنتجات"};document.getElementById("productsTitle").textContent=names[cat]||names.all;
+const arr=storeProducts.filter(p=>cat==="all"||p.category===cat);document.getElementById("gridProducts").innerHTML=arr.map(p=>`<article class="product"><a class="product-img" href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a><div class="product-body"><a href="product.html?id=${p.id}"><h3>${p.name}</h3></a><div class="rating">★★★★★ <span>(${p.reviews})</span></div><div class="price">${money(p.price)}</div><button class="btn full" onclick="addToCart(${p.id});this.textContent='تمت الإضافة ✓'">أضف إلى السلة</button></div></article>`).join("");
+</script></body></html>
