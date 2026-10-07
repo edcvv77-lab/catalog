@@ -89,8 +89,10 @@ document.getElementById("sendOrder").addEventListener("click",()=>{
   error.classList.remove("show");
   localStorage.setItem("umTurkiCustomer",JSON.stringify(data));
 
+  const orderId="UT-"+Date.now().toString().slice(-8);
   const lines=[
     "مرحبًا، أريد تأكيد طلب جديد من متجر أم تركي:",
+    "رقم الطلب: "+orderId,
     "",
     "بيانات العميل:",
     "• الاسم: "+data.name,
@@ -117,6 +119,7 @@ document.getElementById("sendOrder").addEventListener("click",()=>{
   lines.push("طريقة الدفع: "+payment);
   if(data.note)lines.push("ملاحظات: "+data.note);
   lines.push("أرجو تأكيد توفر المنتجات والتوصيل.");
+  localStorage.setItem("umTurkiLastOrder",JSON.stringify({id:orderId,createdAt:new Date().toISOString(),total:total}));
   window.open("https://wa.me/967776436212?text="+encodeURIComponent(lines.join("\n")),"_blank","noopener");
 });
 </script>
