@@ -251,7 +251,7 @@
     function checkoutWhatsApp(){
       if(!cart.length){showToast("أضف منتجات إلى السلة أولًا");return}
       var total=0;var lines=["مرحبًا، أريد تأكيد هذا الطلب من متجر أم تركي:",""];
-      cart.forEach(function(item){var p=products.find(function(x){return x.id===item.id});if(p){lines.push("• "+p.name+" × "+item.qty+" = "+money(p.price*item.qty));total+=p.price*item.qty}});
+      cart.forEach(function(item){var p=products.find(function(x){return x.id===item.id});if(p){lines.push("• المنتج: "+p.name);lines.push("  الكمية: "+item.qty);lines.push("  سعر الوحدة: "+money(p.price));lines.push("  إجمالي المنتج: "+money(p.price*item.qty));lines.push("");total+=p.price*item.qty}});
       lines.push("","الإجمالي: "+money(total),"طريقة الدفع المفضلة: الدفع عند الاستلام","أرجو تأكيد التوصيل.");
       window.open("https://wa.me/967776436212?text="+encodeURIComponent(lines.join("\n")),"_blank","noopener");
     }
