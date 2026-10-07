@@ -1,77 +1,268 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مركز مجتمع أيهم</title>
-  <link rel="stylesheet" href="../assets/style.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- تحميل الإعدادات لتطبيق الثيم والألوان عبر localStorage -->
-  <script src="../assets/load-settings.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1f542f">
+  <meta name="description" content="متجر أم تركي للأعشاب ومنتجات العناية الطبيعية بالبشرة والشعر.">
+  <title>متجر أم تركي | الأعشاب والعناية الطبيعية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --green:#1f542f;--green-2:#2f6b3f;--green-3:#dfeade;--cream:#fbf7ef;--sand:#eee2cb;
+      --gold:#a88648;--ink:#17231b;--muted:#6f776f;--line:#e8e5de;--white:#fff;--danger:#d93939;
+      --shadow:0 14px 40px rgba(31,84,47,.12);--radius:24px
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Tajawal",system-ui,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:76px}
+    button,input{font:inherit}button{cursor:pointer}.wrap{width:min(1180px,calc(100% - 28px));margin:auto}
+    .topbar{background:var(--green);color:#fff;font-size:13px}.topbar .wrap{height:34px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .topbar a{color:#fff;text-decoration:none}.header{background:rgba(251,247,239,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(31,84,47,.08)}
+    .head-main{display:grid;grid-template-columns:auto minmax(280px,1fr) auto;align-items:center;gap:28px;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);white-space:nowrap}.brand-mark{width:56px;height:56px;display:grid;place-items:center}
+    .brand-mark svg{width:54px;height:54px}.brand-title{font-weight:800;font-size:26px;line-height:1}.brand-sub{font-size:12px;color:var(--muted);margin-top:5px}
+    .search{height:48px;background:#fff;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;gap:10px;padding:0 18px;box-shadow:0 5px 18px rgba(25,55,33,.04)}
+    .search svg{width:20px}.search input{border:0;outline:0;background:transparent;width:100%;color:var(--ink)}.search input::placeholder{color:#9a9e98}
+    .head-actions{display:flex;align-items:center;gap:9px}.icon-btn{width:44px;height:44px;border-radius:15px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;position:relative;color:var(--ink)}
+    .icon-btn svg{width:22px;height:22px}.badge{position:absolute;top:-5px;right:-4px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:var(--green);color:#fff;font-size:11px;display:grid;place-items:center}
+    .nav{border-top:1px solid rgba(31,84,47,.06)}.nav .wrap{display:flex;align-items:center;gap:8px;height:52px}.nav a{color:#37463b;text-decoration:none;font-weight:600;padding:9px 15px;border-radius:12px}.nav a.active{background:var(--green);color:#fff}.nav a:hover{background:var(--green-3)}
+    .hero{margin-top:20px}.hero-card{min-height:420px;border-radius:30px;overflow:hidden;position:relative;background:
+      linear-gradient(90deg,rgba(252,245,231,.98) 0%,rgba(252,245,231,.92) 38%,rgba(252,245,231,.18) 66%,rgba(0,0,0,.06) 100%),
+      url("https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1500&q=86") center/cover no-repeat;box-shadow:var(--shadow)}
+    .hero-content{width:min(560px,58%);padding:58px 56px;position:relative;z-index:2}.eyebrow{display:inline-flex;align-items:center;gap:7px;background:#f2e4c8;color:#5b4b2e;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:700}
+    .hero h1{font-size:clamp(40px,5vw,66px);line-height:1.05;margin:20px 0 10px;color:#133822}.hero h2{font-size:clamp(22px,3vw,34px);margin:0 0 15px;color:#73502f}
+    .hero p{font-size:18px;line-height:1.9;color:#655f54;margin:0 0 26px}.primary{border:0;background:var(--green);color:#fff;border-radius:18px;padding:14px 24px;font-weight:800;font-size:17px;display:inline-flex;align-items:center;gap:9px;box-shadow:0 10px 24px rgba(31,84,47,.22)}
+    .primary:hover{background:#174526;transform:translateY(-1px)}.primary svg{width:20px}
+    .features{margin-top:-28px;position:relative;z-index:4;background:rgba(255,255,255,.94);border:1px solid #eee9de;border-radius:24px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);padding:14px}
+    .feature{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;border-left:1px solid var(--line)}.feature:last-child{border-left:0}
+    .feature-icon{width:48px;height:48px;border-radius:16px;background:#edf4ea;display:grid;place-items:center;color:var(--green)}.feature-icon svg{width:25px}.feature b{display:block;font-size:14px}.feature span{font-size:12px;color:var(--muted)}
+    section{padding:30px 0 6px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:18px}.section-head h3{font-size:28px;margin:0}.section-head p{margin:5px 0 0;color:var(--muted)}
+    .link-btn{border:0;background:transparent;color:var(--green);font-weight:800}.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .cat{height:165px;border:0;border-radius:22px;overflow:hidden;position:relative;text-align:right;color:#fff;padding:0;background:#ddd;box-shadow:0 8px 22px rgba(34,67,40,.08)}
+    .cat:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(9,31,16,.72),rgba(9,31,16,.04) 68%)}.cat span{position:absolute;right:18px;bottom:18px;z-index:2;font-size:20px;font-weight:800}.cat small{display:block;font-size:12px;font-weight:500;margin-top:3px;opacity:.9}
+    .cat img{width:100%;height:100%;object-fit:cover;transition:.35s}.cat:hover img{transform:scale(1.05)}
+    .filters{display:flex;gap:8px;overflow:auto;padding:2px 0 8px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.chip{border:1px solid var(--line);background:#fff;padding:9px 15px;border-radius:999px;white-space:nowrap;color:#526056;font-weight:700}.chip.active{background:var(--green);border-color:var(--green);color:#fff}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.product{background:#fff;border:1px solid #ece9e2;border-radius:22px;overflow:hidden;box-shadow:0 8px 25px rgba(45,72,50,.06);display:flex;flex-direction:column}
+    .prod-img{height:230px;position:relative;background:#eee}.prod-img img{width:100%;height:100%;object-fit:cover}.heart{position:absolute;top:12px;left:12px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.9);display:grid;place-items:center;color:#2c3b30}.heart.active{background:#fff1f1;color:#d93939}.discount{position:absolute;top:12px;right:12px;background:#e73d3d;color:#fff;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800}
+    .prod-body{padding:15px;display:flex;flex-direction:column;flex:1}.prod-body h4{font-size:17px;margin:0 0 6px}.meta{display:flex;align-items:center;gap:5px;font-size:12px;color:#9a7b19}.meta span{color:var(--muted)}.price{display:flex;align-items:center;gap:8px;margin:12px 0 13px}.price strong{font-size:19px;color:var(--green)}.old{font-size:12px;text-decoration:line-through;color:#aaa}.add{margin-top:auto;border:0;background:var(--green);color:#fff;border-radius:13px;padding:11px 13px;font-weight:800;width:100%}.add:hover{background:#174526}
+    .about{margin:34px 0 20px;background:#eaf1e7;border-radius:28px;padding:34px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}.about h3{font-size:29px;margin:0 0 9px}.about p{margin:0;color:#5b685e;line-height:1.9;max-width:700px}.about-badge{width:120px;height:120px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:var(--shadow);color:var(--green)}.about-badge svg{width:64px}
+    footer{margin-top:35px;background:#173d25;color:#dce8dd;padding:34px 0 90px}.foot{display:flex;justify-content:space-between;gap:25px;align-items:center}.foot strong{color:#fff;font-size:21px}.foot p{margin:5px 0 0;color:#b8cdbd;font-size:13px}.foot a{color:#fff;text-decoration:none}
+    .wa{position:fixed;left:18px;bottom:92px;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 25px rgba(0,0,0,.18);z-index:48;text-decoration:none}.wa svg{width:28px}
+    .bottom-nav{display:none}.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.36);z-index:70;opacity:0;pointer-events:none;transition:.2s}.drawer-backdrop.show{opacity:1;pointer-events:auto}
+    .drawer{position:fixed;top:0;left:0;height:100dvh;width:min(420px,92vw);background:#fff;z-index:71;transform:translateX(-105%);transition:.28s;display:flex;flex-direction:column;box-shadow:20px 0 60px rgba(0,0,0,.12)}
+    .drawer.show{transform:none}.drawer-head{padding:18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.drawer-head h3{margin:0}.close{border:0;background:#f3f3f1;width:38px;height:38px;border-radius:12px}
+    .cart-items{padding:15px;overflow:auto;flex:1}.cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:11px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center}.cart-item img{width:70px;height:70px;object-fit:cover;border-radius:14px}.cart-item h5{margin:0 0 4px;font-size:14px}.cart-item small{color:var(--muted)}.qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{width:26px;height:26px;border:1px solid var(--line);background:#fff;border-radius:8px}.remove{border:0;background:transparent;color:#b22;font-size:18px}
+    .cart-foot{border-top:1px solid var(--line);padding:17px;background:#fff}.total{display:flex;justify-content:space-between;font-size:18px;margin-bottom:12px}.checkout{width:100%;border:0;background:var(--green);color:#fff;border-radius:15px;padding:13px;font-weight:800}.empty{text-align:center;color:var(--muted);padding:50px 10px}.toast{position:fixed;top:92px;left:50%;transform:translate(-50%,-12px);background:#173d25;color:#fff;padding:11px 17px;border-radius:13px;z-index:100;opacity:0;pointer-events:none;transition:.2s;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:950px){.head-main{grid-template-columns:1fr auto;gap:12px}.search{grid-column:1/-1;grid-row:2}.nav{display:none}.features{grid-template-columns:repeat(2,1fr)}.feature:nth-child(2){border-left:0}.products{grid-template-columns:repeat(3,1fr)}.hero-content{width:66%}.categories{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:700px){
+      body{padding-bottom:82px}.topbar{display:none}.header{position:relative}.wrap{width:min(100% - 20px,1180px)}.head-main{display:flex;flex-wrap:wrap;padding:12px 0}.brand{order:1;flex:1;justify-content:center}.brand-mark{width:42px;height:42px}.brand-mark svg{width:42px}.brand-title{font-size:21px}.brand-sub{font-size:10px}.head-actions{order:1}.head-actions .hide-mobile{display:none}.search{order:2;flex-basis:100%;height:45px;margin-top:4px}
+      .hero{margin-top:8px}.hero-card{min-height:355px;border-radius:24px;background:linear-gradient(180deg,rgba(15,53,28,.04) 12%,rgba(12,43,23,.78) 100%),url("https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=84") center/cover}.hero-content{width:100%;padding:145px 24px 25px;color:#fff}.eyebrow{background:rgba(255,255,255,.9);color:#35563d}.hero h1{font-size:34px;color:#fff;margin:12px 0 4px}.hero h2{font-size:23px;color:#f2dfb7;margin-bottom:7px}.hero p{font-size:14px;line-height:1.7;color:#eef4ef;margin-bottom:15px;max-width:92%}.primary{padding:12px 18px;font-size:15px;border-radius:15px}
+      .features{margin-top:10px;grid-template-columns:repeat(4,1fr);padding:8px 3px;border-radius:20px;overflow:hidden}.feature{display:block;text-align:center;padding:7px 3px;border-left:1px solid var(--line)}.feature-icon{width:38px;height:38px;border-radius:13px;margin:0 auto 5px}.feature-icon svg{width:21px}.feature b{font-size:11px;line-height:1.25}.feature span{display:none}
+      section{padding-top:24px}.section-head{margin-bottom:13px}.section-head h3{font-size:21px}.section-head p{font-size:12px}.categories{display:flex;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory;scrollbar-width:none}.categories::-webkit-scrollbar{display:none}.cat{min-width:39vw;height:140px;scroll-snap-align:start}.cat span{font-size:16px;right:13px;bottom:13px}
+      .products{display:flex;overflow-x:auto;gap:11px;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:6px}.products::-webkit-scrollbar{display:none}.product{min-width:72vw;max-width:72vw;scroll-snap-align:start}.prod-img{height:225px}.prod-body{padding:13px}.about{padding:22px;display:block}.about h3{font-size:23px}.about-badge{display:none}.foot{display:block;text-align:center}.foot>div+div{margin-top:14px}
+      .bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;bottom:0;right:0;left:0;height:72px;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:60;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav button,.bottom-nav a{border:0;background:transparent;text-decoration:none;color:#6c746e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:700;position:relative}.bottom-nav .active{color:var(--green)}.bottom-nav svg{width:22px;height:22px}.bottom-nav .badge{top:6px;right:calc(50% - 22px)}.wa{bottom:88px;width:52px;height:52px}.drawer{top:auto;bottom:0;width:100%;height:min(76dvh,680px);border-radius:24px 24px 0 0;transform:translateY(105%)}.drawer.show{transform:none}.toast{top:18px}
+    }
+    @media(min-width:701px) and (max-width:1100px){.products{grid-template-columns:repeat(3,1fr)}}
+  </style>
 </head>
 <body>
-  <header class="p-8 text-center space-y-4">
-    <h1 class="text-4xl font-extrabold">مركز مجتمع أيهم</h1>
-    <p class="text-gray-300 max-w-xl mx-auto">منصة شاملة للتواصل وإدارة المشاريع والمحتوى، تجمع بين الدردشة، المنشورات، المهام، مركز المعرفة، الدعم، والإنجازات، في واجهة واحدة أنيقة وسهلة الاستخدام.</p>
-  </header>
-  <main class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-    <!-- بطاقة تسجيل الدخول -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">الانضمام إلى المجتمع</h2>
-      <p class="mb-4 text-gray-300">قم بإنشاء حساب أو تسجيل الدخول لبدء تجربتك.</p>
-      <a href="login.html" class="btn-custom">تسجيل الدخول / حساب جديد</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>🚚 توصيل حسب المنطقة • الدفع عند الاستلام متوفر</span>
+      <a href="tel:776436212">تواصل معنا: 776436212</a>
     </div>
-    <!-- بطاقة الدردشة -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">الدردشة والغرف</h2>
-      <p class="mb-4 text-gray-300">انضم إلى غرف متعددة وتحدث مع الأصدقاء، وتابع الرسائل في الوقت الحقيقي.</p>
-      <a href="chat.html" class="btn-custom">فتح الدردشة</a>
-    </div>
-    <!-- بطاقة المنشورات -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">المنشورات</h2>
-      <p class="mb-4 text-gray-300">شارك أفكارك في موجز الأخبار، شاهد تعليقات وتفاعلات الآخرين.</p>
-      <a href="feed.html" class="btn-custom">عرض المنشورات</a>
-    </div>
-    <!-- بطاقة المهام والمشاريع -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">المهام والمشاريع</h2>
-      <p class="mb-4 text-gray-300">خطط وتابع سير عملك أو عمل فريقك بأدوات تنظيم متطورة.</p>
-      <a href="projects.html" class="btn-custom">إدارة المشاريع</a>
-    </div>
-    <!-- بطاقة مركز المعرفة -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">مركز المعرفة</h2>
-      <p class="mb-4 text-gray-300">استكشف المقالات والموارد التعليمية، أو أضف محتواك الخاص.</p>
-      <a href="knowledge.html" class="btn-custom">زيارة مركز المعرفة</a>
-    </div>
-    <!-- بطاقة الدعم -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">الدعم والتذاكر</h2>
-      <p class="mb-4 text-gray-300">اطلب المساعدة أو راجع تذاكرك وابق على اطلاع على حالتها.</p>
-      <a href="support.html" class="btn-custom">فتح مركز الدعم</a>
-    </div>
-    <!-- بطاقة الإنجازات واللوحة -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">الإنجازات واللوحة</h2>
-      <p class="mb-4 text-gray-300">شاهد ترتيب المستخدمين وحقق إنجازاتك.</p>
-      <a href="leaderboard.html" class="btn-custom">لوحة الصدارة</a>
-    </div>
-    <!-- بطاقة البحث والإشعارات -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">البحث والإشعارات</h2>
-      <p class="mb-4 text-gray-300">ابحث في كل المحتوى، وتابع إشعاراتك بسهولة.</p>
-      <div class="flex gap-4">
-        <a href="search.html" class="btn-custom">البحث</a>
-        <a href="notifications.html" class="btn-custom">الإشعارات</a>
+  </div>
+
+  <header class="header">
+    <div class="wrap head-main">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none"><path d="M31 57c1-18 3-32 17-47" stroke="#1f542f" stroke-width="4" stroke-linecap="round"/><path d="M34 39C20 38 14 30 12 20c11-1 21 5 22 19Z" fill="#6f8b4d"/><path d="M39 28c-2-11 4-20 14-24 3 11-2 20-14 24Z" fill="#2f6b3f"/><path d="M31 50C20 51 12 47 8 39c9-4 19 0 23 11Z" fill="#a4ad72"/></svg>
+        </span>
+        <span><span class="brand-title">متجر أم تركي</span><span class="brand-sub">للأعشاب والمنتجات الطبيعية</span></span>
+      </a>
+
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.4-3.4"/></svg>
+        <input id="searchInput" type="search" placeholder="ابحث عن منتجك المفضل..." autocomplete="off">
+      </label>
+
+      <div class="head-actions">
+        <button class="icon-btn hide-mobile" id="favTop" aria-label="المفضلة">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
+        </button>
+        <button class="icon-btn" id="cartTop" aria-label="السلة">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+          <span class="badge cart-count">0</span>
+        </button>
       </div>
     </div>
-    <!-- بطاقة لوحة المالك -->
-    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg flex flex-col items-center text-center">
-      <h2 class="text-xl font-bold mb-2">لوحة المالك</h2>
-      <p class="mb-4 text-gray-300">إدارة المجتمع والتحكم في جميع أقسام المنصة من مكان واحد.</p>
-      <a href="owner.html" class="btn-custom">الانتقال للوحة المالك</a>
+    <nav class="nav">
+      <div class="wrap">
+        <a class="active" href="#">الرئيسية</a><a href="#categories">العناية بالوجه</a><a href="#categories">العناية بالبشرة</a><a href="#categories">العناية بالشعر</a><a href="#categories">الأعشاب والخلطات</a><a href="#products">العروض</a><a href="#about">من نحن</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div class="hero-card">
+        <div class="hero-content">
+          <span class="eyebrow">🌿 طبيعة أجمل... لك ولعائلتك</span>
+          <h1>متجر أم تركي</h1>
+          <h2>للأعشاب والمنتجات الطبيعية</h2>
+          <p>منتجات مختارة للعناية ببشرتك وشعرك وروتينك اليومي، بتجربة شراء عربية بسيطة وواضحة.</p>
+          <button class="primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+            تسوق الآن
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h12v20H6z"/><path d="M9 18h6"/></svg></span><div><b>الدفع عند الاستلام</b><span>الخيار المفضل للطلبات</span></div></div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h12v10H3z"/><path d="M15 10h3l3 3v4h-6"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><div><b>توصيل مرن</b><span>رسوم حسب المنطقة</span></div></div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c4-4 8-8 8-14-6 0-10 4-10 10"/><path d="M12 22C8 18 4 14 4 8c5 0 8 3 9 7"/></svg></span><div><b>اختيارات طبيعية</b><span>لروتين العناية اليومي</span></div></div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 0 1-8 8H6l-4 2 1.3-4A8 8 0 1 1 21 12Z"/></svg></span><div><b>دعم واتساب</b><span>776436212</span></div></div>
+      </div>
     </div>
+
+    <section id="categories">
+      <div class="wrap">
+        <div class="section-head"><div><h3>الأقسام الرئيسية</h3><p>اختاري القسم المناسب لاحتياجك</p></div><button class="link-btn" data-filter="all">عرض الكل ←</button></div>
+        <div class="categories">
+          <button class="cat" data-filter="face"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=700&q=82" alt="العناية بالوجه"><span>العناية بالوجه<small>ماسكات وروتين يومي</small></span></button>
+          <button class="cat" data-filter="skin"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=82" alt="العناية بالبشرة"><span>العناية بالبشرة<small>تفتيح وترطيب وعناية</small></span></button>
+          <button class="cat" data-filter="hair"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=82" alt="العناية بالشعر"><span>العناية بالشعر<small>زيوت وخلطات للشعر</small></span></button>
+          <button class="cat" data-filter="herbs"><img src="https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=700&q=82" alt="الأعشاب والخلطات"><span>الأعشاب والخلطات<small>خلطات مختارة بعناية</small></span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="wrap">
+        <div class="section-head"><div><h3>منتجات مميزة</h3><p>منتجات تجريبية للعرض — سنستبدلها بمنتجاتك وصورك</p></div></div>
+        <div class="filters" id="filters">
+          <button class="chip active" data-filter="all">الكل</button><button class="chip" data-filter="face">الوجه</button><button class="chip" data-filter="skin">البشرة</button><button class="chip" data-filter="hair">الشعر</button><button class="chip" data-filter="herbs">الأعشاب</button>
+        </div>
+        <div class="products" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="about">
+          <div><h3>لماذا متجر أم تركي؟</h3><p>واجهة شراء عربية واضحة، طلب سريع عبر واتساب، ودفع عند الاستلام كخيار أساسي. سنضيف لاحقًا بيانات المنتجات الحقيقية، مناطق الشحن، روابط التواصل، وطرق التحويل التي تعتمدينها.</p></div>
+          <div class="about-badge"><svg viewBox="0 0 64 64" fill="none"><path d="M31 57c1-18 3-32 17-47" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M34 39C20 38 14 30 12 20c11-1 21 5 22 19Z" fill="currentColor" opacity=".65"/><path d="M39 28c-2-11 4-20 14-24 3 11-2 20-14 24Z" fill="currentColor"/></svg></div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer><div class="wrap foot"><div><strong>متجر أم تركي</strong><p>للأعشاب والمنتجات الطبيعية والعناية اليومية.</p></div><div><a href="tel:776436212">776436212</a> • الدفع عند الاستلام متوفر</div></div></footer>
+
+  <a class="wa" href="https://wa.me/967776436212" target="_blank" rel="noopener" aria-label="واتساب">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 1.8 17.8L0 24l6.4-1.7a12 12 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 20.5 3.5Zm-8.3 18.2a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.4 4.7Zm5.4-7.4c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.7.1-.2 0-.5-.1-.7-.1-.1-.7-1.7-1-2.4-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.3 3.4 1.4 3.6.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.4-.2-.7-.3Z"/></svg>
+  </a>
+
+  <nav class="bottom-nav">
+    <button class="active" onclick="scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 9-8 9 8"/><path d="M5 10v11h14V10"/><path d="M9 21v-7h6v7"/></svg>الرئيسية</button>
+    <button onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>الأقسام</button>
+    <button id="cartBottom"><span class="badge cart-count">0</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>السلة</button>
+    <button id="favBottom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>المفضلة</button>
+    <button onclick="showToast('الحساب وتسجيل الدخول سنضيفهما في المرحلة التالية')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>حسابي</button>
+  </nav>
+
+  <div class="drawer-backdrop" id="backdrop"></div>
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-head"><h3>سلة التسوق</h3><button class="close" id="closeCart">✕</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot"><div class="total"><span>الإجمالي</span><strong id="cartTotal">0 ر.ي</strong></div><button class="checkout" id="checkoutBtn">إكمال الطلب عبر واتساب</button></div>
+  </aside>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    var products = [
+      {id:1,name:"خلطة عناية وتفتيح طبيعية",category:"skin",price:4000,oldPrice:5000,rating:"4.9",reviews:132,discount:20,image:"https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=82"},
+      {id:2,name:"زيت إكليل الجبل للشعر",category:"hair",price:3500,oldPrice:0,rating:"4.8",reviews:98,discount:0,image:"https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=700&q=82"},
+      {id:3,name:"صابون طبيعي بالأعشاب",category:"herbs",price:2500,oldPrice:3000,rating:"4.7",reviews:54,discount:15,image:"https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=700&q=82"},
+      {id:4,name:"ماسك أعشاب للوجه",category:"face",price:3000,oldPrice:3500,rating:"4.9",reviews:76,discount:15,image:"https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=82"},
+      {id:5,name:"زيت عناية للشعر",category:"hair",price:3000,oldPrice:0,rating:"4.8",reviews:89,discount:0,image:"https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=700&q=82"},
+      {id:6,name:"بودرة أعشاب للعناية",category:"herbs",price:3000,oldPrice:4000,rating:"4.8",reviews:120,discount:25,image:"https://images.unsplash.com/photo-1600428853876-fb5a850b444f?auto=format&fit=crop&w=700&q=82"}
+    ];
+    var cart = JSON.parse(localStorage.getItem("umTurkiCart") || "[]");
+    var favorites = JSON.parse(localStorage.getItem("umTurkiFav") || "[]");
+    var currentFilter = "all";
+    var query = "";
+
+    function money(n){return Number(n).toLocaleString("ar-YE")+" ر.ي"}
+    function save(){localStorage.setItem("umTurkiCart",JSON.stringify(cart));localStorage.setItem("umTurkiFav",JSON.stringify(favorites))}
+    function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(function(){t.classList.remove("show")},2200)}
+
+    function renderProducts(){
+      var grid=document.getElementById("productsGrid");
+      var list=products.filter(function(p){return (currentFilter==="all"||p.category===currentFilter) && p.name.indexOf(query)>-1});
+      if(!list.length){grid.innerHTML='<div class="empty">لا توجد منتجات مطابقة لبحثك.</div>';return}
+      grid.innerHTML=list.map(function(p){
+        var fav=favorites.indexOf(p.id)>-1;
+        return '<article class="product">'+
+          '<div class="prod-img"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy">'+
+          '<button class="heart '+(fav?'active':'')+'" onclick="toggleFav('+p.id+')" aria-label="المفضلة">♡</button>'+
+          (p.discount?'<span class="discount">-'+p.discount+'%</span>':'')+'</div>'+
+          '<div class="prod-body"><h4>'+p.name+'</h4><div class="meta">★★★★★ <span>('+p.reviews+')</span></div>'+
+          '<div class="price"><strong>'+money(p.price)+'</strong>'+(p.oldPrice?'<span class="old">'+money(p.oldPrice)+'</span>':'')+'</div>'+
+          '<button class="add" onclick="addToCart('+p.id+')">أضف إلى السلة 🛒</button></div></article>';
+      }).join("");
+    }
+    function addToCart(id){
+      var item=cart.find(function(x){return x.id===id});
+      if(item)item.qty+=1;else cart.push({id:id,qty:1});
+      save();updateCart();showToast("تمت إضافة المنتج إلى السلة");
+    }
+    function toggleFav(id){
+      var i=favorites.indexOf(id);if(i>-1)favorites.splice(i,1);else favorites.push(id);save();renderProducts();showToast(i>-1?"تمت الإزالة من المفضلة":"تمت الإضافة إلى المفضلة");
+    }
+    function changeQty(id,delta){
+      var item=cart.find(function(x){return x.id===id});if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(function(x){return x.id!==id});save();updateCart();
+    }
+    function removeItem(id){cart=cart.filter(function(x){return x.id!==id});save();updateCart()}
+    function updateCart(){
+      var count=cart.reduce(function(s,x){return s+x.qty},0);document.querySelectorAll(".cart-count").forEach(function(el){el.textContent=count});
+      var box=document.getElementById("cartItems");var total=0;
+      if(!cart.length){box.innerHTML='<div class="empty">سلتك فارغة حاليًا 🌿</div>';document.getElementById("cartTotal").textContent=money(0);return}
+      box.innerHTML=cart.map(function(item){
+        var p=products.find(function(x){return x.id===item.id});if(!p)return "";total+=p.price*item.qty;
+        return '<div class="cart-item"><img src="'+p.image+'" alt=""><div><h5>'+p.name+'</h5><small>'+money(p.price)+'</small><div class="qty"><button onclick="changeQty('+p.id+',1)">+</button><b>'+item.qty+'</b><button onclick="changeQty('+p.id+',-1)">−</button></div></div><button class="remove" onclick="removeItem('+p.id+')">×</button></div>';
+      }).join("");
+      document.getElementById("cartTotal").textContent=money(total);
+    }
+    function openCart(){document.getElementById("cartDrawer").classList.add("show");document.getElementById("backdrop").classList.add("show")}
+    function closeCart(){document.getElementById("cartDrawer").classList.remove("show");document.getElementById("backdrop").classList.remove("show")}
+    function setFilter(filter){
+      currentFilter=filter;document.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("active",c.dataset.filter===filter)});renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"});
+    }
+    function showFavorites(){
+      if(!favorites.length){showToast("لا توجد منتجات في المفضلة بعد");return}
+      query="";currentFilter="all";document.getElementById("searchInput").value="";var grid=document.getElementById("productsGrid");
+      grid.innerHTML=products.filter(function(p){return favorites.indexOf(p.id)>-1}).map(function(p){return '<article class="product"><div class="prod-img"><img src="'+p.image+'" alt="'+p.name+'"><button class="heart active" onclick="toggleFav('+p.id+')">♡</button></div><div class="prod-body"><h4>'+p.name+'</h4><div class="meta">★★★★★ <span>('+p.reviews+')</span></div><div class="price"><strong>'+money(p.price)+'</strong></div><button class="add" onclick="addToCart('+p.id+')">أضف إلى السلة 🛒</button></div></article>'}).join("");
+      document.getElementById("products").scrollIntoView({behavior:"smooth"});
+    }
+    function checkoutWhatsApp(){
+      if(!cart.length){showToast("أضف منتجات إلى السلة أولًا");return}
+      var total=0;var lines=["مرحبًا، أريد تأكيد هذا الطلب من متجر أم تركي:",""];
+      cart.forEach(function(item){var p=products.find(function(x){return x.id===item.id});if(p){lines.push("• "+p.name+" × "+item.qty+" = "+money(p.price*item.qty));total+=p.price*item.qty}});
+      lines.push("","الإجمالي: "+money(total),"طريقة الدفع المفضلة: الدفع عند الاستلام","أرجو تأكيد التوصيل.");
+      window.open("https://wa.me/967776436212?text="+encodeURIComponent(lines.join("\n")),"_blank","noopener");
+    }
+
+    document.getElementById("searchInput").addEventListener("input",function(e){query=e.target.value.trim();renderProducts()});
+    document.querySelectorAll("[data-filter]").forEach(function(el){el.addEventListener("click",function(){setFilter(this.dataset.filter)})});
+    document.getElementById("cartTop").addEventListener("click",openCart);document.getElementById("cartBottom").addEventListener("click",openCart);
+    document.getElementById("closeCart").addEventListener("click",closeCart);document.getElementById("backdrop").addEventListener("click",closeCart);
+    document.getElementById("favBottom").addEventListener("click",showFavorites);document.getElementById("favTop").addEventListener("click",showFavorites);
+    document.getElementById("checkoutBtn").addEventListener("click",checkoutWhatsApp);
+    renderProducts();updateCart();
+  </script>
 </body>
 </html>
