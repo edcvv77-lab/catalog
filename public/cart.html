@@ -5,10 +5,11 @@
 <a class="head-action" href="cart.html" aria-label="السلة">🛒<span class="badge cart-count">0</span></a>
 </div></header><main class="wrap"><section class="page-hero"><h1>سلة التسوق</h1><p>راجعي المنتجات والكميات قبل إرسال الطلب عبر واتساب.</p></section><div id="cartList" class="cart-list"></div><div class="summary" id="summary"><div class="summary-line"><span>عدد القطع</span><strong id="pieces">0</strong></div><div class="summary-line total"><span>الإجمالي</span><strong id="total">0 ر.ي</strong></div><a class="btn full" style="display:block;text-align:center" href="checkout.html">متابعة لإتمام الطلب</a><div style="margin-top:9px;text-align:center;font-size:12px;color:var(--muted)">راجع بيانات التوصيل وطريقة الدفع قبل إرسال الطلب.</div></div></main>
 <nav class="bottom">
-<a class="" href="index.html"><span>⌂</span>الرئيسية</a>
-<a class="" href="categories.html"><span>▦</span>الأقسام</a>
-<a class="" href="favorites.html"><span>♡</span>المفضلة</a>
-<a class="active" href="cart.html"><span>🛒</span>السلة</a>
+  <a class="" href="index.html"><span>⌂</span>الرئيسية</a>
+  <a class="" href="categories.html"><span>▦</span>الأقسام</a>
+  <a class="active" href="cart.html"><span>🛒</span>السلة</a>
+  <a class="" href="favorites.html"><span>♡</span>المفضلة</a>
+  <a class="" href="about.html"><span>ⓘ</span>من نحن</a>
 </nav><script src="store-data.js"></script><script>
 function change(id,d){let c=getCart(),i=c.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<=0)c=c.filter(x=>x.id!==id);saveCart(c);updateBadges();draw()}
 function removeItem(id){saveCart(getCart().filter(x=>x.id!==id));updateBadges();draw()}
