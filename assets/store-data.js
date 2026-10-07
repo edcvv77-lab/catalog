@@ -5,7 +5,9 @@ window.storeProducts=[
 {id:3,name:"صابون طبيعي بالأعشاب",category:"herbs",price:2500,rating:"4.7",reviews:54,image:"https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=900&q=82",desc:"صابون أعشاب تجريبي ضمن واجهة المتجر."},
 {id:4,name:"ماسك أعشاب للوجه",category:"face",price:3000,rating:"4.9",reviews:76,image:"https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=82",desc:"ماسك أعشاب تجريبي لصفحة العناية بالوجه."},
 {id:5,name:"زيت عناية للشعر",category:"hair",price:3000,rating:"4.8",reviews:89,image:"https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=82",desc:"زيت عناية تجريبي للشعر."},
-{id:6,name:"بودرة أعشاب للعناية",category:"herbs",price:3000,rating:"4.8",reviews:120,image:"https://images.unsplash.com/photo-1600428853876-fb5a850b444f?auto=format&fit=crop&w=900&q=82",desc:"بودرة أعشاب تجريبية ضمن قسم الخلطات."}
+{id:6,name:"بودرة أعشاب للعناية",category:"herbs",price:3000,rating:"4.8",reviews:120,image:"https://images.unsplash.com/photo-1600428853876-fb5a850b444f?auto=format&fit=crop&w=900&q=82",desc:"بودرة أعشاب تجريبية ضمن قسم الخلطات."},
+{id:7,name:"ماسك طين طبيعي للوجه",category:"face",price:2800,rating:"4.8",reviews:61,image:"https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=900&q=82",desc:"ماسك تجريبي للعناية بالوجه ضمن عرض المتجر."},
+{id:8,name:"كريم ترطيب وعناية بالبشرة",category:"skin",price:3800,rating:"4.7",reviews:83,image:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=900&q=82",desc:"كريم تجريبي لعرض شكل منتجات العناية بالبشرة."}
 ];
 window.money=n=>Number(n).toLocaleString("ar-YE")+" ر.ي";
 window.getCart=()=>JSON.parse(localStorage.getItem("umTurkiCart")||"[]");
