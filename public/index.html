@@ -207,10 +207,10 @@
       grid.innerHTML=list.map(function(p){
         var fav=favorites.indexOf(p.id)>-1;
         return '<article class="product">'+
-          '<div class="prod-img"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy">'+
+          '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"></a>'+
           '<button class="heart '+(fav?'active':'')+'" onclick="toggleFav('+p.id+')" aria-label="المفضلة">♡</button>'+
           (p.discount?'<span class="discount">-'+p.discount+'%</span>':'')+'</div>'+
-          '<div class="prod-body"><h4>'+p.name+'</h4><div class="meta">★★★★★ <span>('+p.reviews+')</span></div>'+
+          '<div class="prod-body"><h4><a href="product.html?id='+p.id+'">'+p.name+'</a></h4><div class="meta">★★★★★ <span>('+p.reviews+')</span></div>'+
           '<div class="price"><strong>'+money(p.price)+'</strong>'+(p.oldPrice?'<span class="old">'+money(p.oldPrice)+'</span>':'')+'</div>'+
           '<button class="add" onclick="addToCart('+p.id+')">أضف إلى السلة 🛒</button></div></article>';
       }).join("");
