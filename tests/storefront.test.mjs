@@ -230,3 +230,26 @@ test('one-tap discovery renders real products and filters instantly',()=>{
   grid.onclick({target:{closest:s=>s==='button[data-add-id]'?{dataset:{addId:'15'},textContent:'',isConnected:true}:null}});
   assert.ok(scope.getCart().some(x=>x.id===15));
 });
+
+
+test('category images are art-directed consistently on mobile without losing originals',()=>{
+  const css=read('public/card-images.css');
+  for(const page of ['index','categories','discover','favorites','product','cart']){
+    const html=read('public/'+page+'.html');
+    assert.match(html,/<link rel="stylesheet" href="card-images\.css">/);
+  }
+  assert.match(css,/\.simple-home \.simple-category > img/);
+  assert.match(css,/object-fit:cover/);
+  assert.match(css,/\.cat-grid \.cat-card > img/);
+  assert.match(css,/grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(css,/\.product-detail \.detail-img img/);
+  assert.match(css,/object-fit:contain/);
+  assert.match(css,/prefers-reduced-motion:reduce/);
+  for(const img of Object.values((()=>{
+    const data=read('public/store-data.js');
+    const matched=[...data.matchAll(/image:"([^"]+\.webp)"/g)];
+    return Object.fromEntries(matched.map((m,i)=>[i,m[1]]));
+  })())){
+    assert.ok(existsSync(resolve(root,'public',img)), 'original image missing: '+img);
+  }
+});
