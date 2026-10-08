@@ -151,6 +151,6 @@ test('comparison board adds a real product and renders descriptions',()=>{
   app.addButton.onclick();
   assert.match(app.compare.innerHTML,/بخاخ أمان/);
   assert.match(app.compare.innerHTML,/طريقة الاستخدام/);
-  assert.match(app.compare.innerHTML,/تُؤكَّد عند التواصل/);
+  assert.match(app.compare.innerHTML,/عند التواصل مع المتجر/);
   assert.deepEqual(JSON.parse(app.map.get('umTurkiCompareV1')),[1]);
 });
