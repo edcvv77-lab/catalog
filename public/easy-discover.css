@@ -1,0 +1,87 @@
+/* Discover instantly, explore gracefully. */
+.easy-page{background:#fbfaf7;color:#214630;padding-bottom:0}
+.easy-hero{display:grid;grid-template-columns:1.04fr .96fr;min-height:360px;overflow:hidden;border-radius:27px;background:linear-gradient(110deg,#153b29,#275f43 70%,#347b52);box-shadow:0 23px 57px #183d2b28}
+.easy-hero-copy{padding:clamp(25px,4.5vw,55px);align-self:center;color:#fff}
+.easy-hero-copy h1{color:#fff;font-size:clamp(35px,4.5vw,59px);line-height:1.12;margin:18px 0}
+.easy-hero-copy em{color:#efd09c;font-style:normal}
+.easy-hero-copy p{font-size:14px;line-height:1.9;color:#d9e8de;max-width:480px}
+.easy-hero-button{display:inline-flex;background:#f4d9a4;color:#204b33;padding:12px 20px;border-radius:13px;font-size:13px;font-weight:800;margin-top:9px}
+.easy-hero-button:hover{transform:translateY(-3px);background:#ffe6ba}
+.easy-hero-visual{display:grid;place-items:center;background:radial-gradient(circle,#fff5dd,#dfcba5);position:relative;overflow:hidden}
+.easy-hero-ring{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;border:1px solid #3f764041;box-shadow:0 0 0 55px #2c6a3512}
+.easy-hero-visual img{position:relative;z-index:1;width:86%;height:300px;object-fit:contain;filter:drop-shadow(0 22px 21px #4d542d54);animation:easyFloat 5s ease-in-out infinite}
+@keyframes easyFloat{50%{transform:translateY(-10px)}}
+.easy-discovery{padding:44px 0 0;scroll-margin-top:24px}
+.easy-heading,.easy-result-header{display:flex;justify-content:space-between;align-items:end;gap:15px}
+.easy-heading{margin-bottom:20px}
+.easy-heading h2{font-size:clamp(25px,3vw,35px);color:#1b462f;margin:7px 0}
+.easy-heading p{margin:0;font-size:13px;color:#819083}
+.easy-all-link{font-weight:800;font-size:12px;color:#286142;text-decoration:underline;text-underline-offset:5px}
+.easy-category-pills,.easy-interest-pills{display:flex;flex-wrap:wrap;gap:9px}
+.easy-category-pills{margin-bottom:24px}
+.easy-category-pills button{border:1px solid #dce7da;background:#fff;color:#315f44;border-radius:100px;padding:11px 17px;min-height:46px;font-weight:800;font-size:12px;display:flex;gap:8px;align-items:center;transition:transform .2s}
+.easy-category-pills button span{font-size:18px}
+.easy-category-pills button:hover{transform:translateY(-2px)}
+.easy-category-pills button[aria-pressed=true]{background:#23563b;border-color:#23563b;color:#fff;box-shadow:0 8px 19px #245c3b22}
+.easy-filter-bar{background:#edf4ec;border:1px solid #dbe9db;border-radius:18px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:13px}
+.easy-filter-bar>div{display:flex;flex-direction:column;gap:6px}
+.easy-filter-bar strong{font-size:13px;color:#28563d}
+.easy-filter-bar small{font-size:11px;color:#819084}
+.easy-search{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #d7e3d6;border-radius:12px;padding:0 13px;min-height:44px;flex:1;max-width:360px}
+.easy-search:focus-within{border-color:#7db38b;box-shadow:0 0 0 3px #76b18524}
+.easy-search span{font-size:24px;color:#638772}
+.easy-search input{width:100%;min-width:0;border:0;outline:0;background:none;font-size:13px;color:#254b36}
+.easy-interest-pills{margin-bottom:25px;min-height:36px}
+.easy-interest-pills button{font-size:11px;font-weight:700;color:#67816d;background:#fff;border:1px solid #e1e8df;padding:8px 13px;border-radius:100px}
+.easy-interest-pills button[aria-pressed=true]{background:#e0eee0;border-color:#add1b2;color:#255b3e}
+.easy-result-header{border-bottom:1px solid #e4eae3;padding-bottom:15px;margin-bottom:17px}
+.easy-result-header h3{font-size:24px;color:#1e5036;margin:0 0 5px}
+.easy-result-header p{font-size:12px;color:#859387;margin:0}
+.easy-count{font-size:11px;font-weight:800;color:#2f6444;background:#eef5ed;border-radius:100px;padding:7px 12px}
+.easy-results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.easy-results .product-img{height:240px}
+.easy-results .product-img>a{width:100%;height:100%;display:block}
+.easy-results .product-img img{width:100%;height:100%;object-fit:contain}
+.easy-results .product-body{padding:14px}
+.easy-results .product h3{font-size:15px}
+.easy-results .product-category{font-size:11px;color:#68886f;font-weight:800}
+.easy-results .product-actions-mini{grid-template-columns:1fr}
+.easy-results .product-actions-mini .btn{font-size:12px}
+.easy-more{display:flex;justify-content:center;margin-top:25px}
+.easy-more[hidden]{display:none}
+.easy-empty{grid-column:1/-1;background:#fff;border:1px dashed #c8d8c9;border-radius:19px;padding:38px;text-align:center}
+.easy-empty h3{color:#285b3f;margin:0 0 9px}
+.easy-empty p{font-size:13px;color:#869287}
+.easy-disclaimer{font-size:11px;color:#8b968c;line-height:1.85;margin:25px 0}
+.easy-help{display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(110deg,#e9f3e6,#f3e9d1);border-radius:21px;padding:28px 32px;margin:31px 0 45px}
+.easy-help h2{font-size:23px;color:#22543a;margin:0 0 7px}
+.easy-help p{font-size:12px;color:#68816d;margin:0}
+.easy-page .lab-footer{background:#19432f;color:#d7e9dc;padding:26px 0}
+@media(max-width:900px){.easy-results{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+.easy-page .lab-shell{width:calc(100% - 24px)}
+.easy-hero{display:flex;flex-direction:column;border-radius:22px}
+.easy-hero-visual{order:-1;height:210px}
+.easy-hero-visual img{height:200px}
+.easy-hero-ring{width:170px}
+.easy-hero-copy{padding:24px}
+.easy-hero-copy h1{font-size:35px;margin:10px 0}
+.easy-hero-copy p{font-size:12px}
+.easy-discovery{padding-top:30px}
+.easy-heading h2{font-size:23px}.easy-heading p{font-size:11px}
+.easy-all-link{font-size:11px}
+.easy-category-pills,.easy-interest-pills{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.easy-category-pills button,.easy-interest-pills button{flex:none;white-space:nowrap}
+.easy-category-pills button{min-height:41px;padding:9px 13px;font-size:11px}
+.easy-filter-bar{display:block;padding:14px}
+.easy-search{margin-top:10px;max-width:none}
+.easy-results{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.easy-results .product-img{height:180px}
+.easy-results .product-body{padding:11px}
+.easy-results .product h3{font-size:13px}
+.easy-result-header h3{font-size:21px}
+.easy-help{display:block;padding:22px}
+.easy-help .btn{margin-top:15px;width:100%}
+.easy-page .studio-dock{bottom:10px;left:10px;right:10px}
+}
+@media(prefers-reduced-motion:reduce){.easy-hero-visual img{animation:none}}
