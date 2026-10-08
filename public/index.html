@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="store-shared.css">
   <link rel="stylesheet" href="premium.css">
   <link rel="stylesheet" href="showcase.css">
+  <link rel="stylesheet" href="flow.css">
 </head>
 <body class="simple-home">
   <div class="simple-announcement"><div class="wrap">
@@ -110,7 +111,7 @@
   <script>
     function card(p){
       const fav=getFav().includes(p.id);
-      return '<article class="product"><a class="product-img" href="product.html?id='+p.id+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"></a>'+
+      return '<article class="product"><div class="product-img"><a href="product.html?id='+p.id+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"></a></div>'+
         '<div class="product-body"><div class="simple-product-top"><span>'+categoryName(p.category)+'</span>'+
         '<button type="button" class="heart '+(fav?'active':'')+'" aria-label="المفضلة: '+p.name+'" aria-pressed="'+fav+'" onclick="const yes=toggleFav('+p.id+');this.classList.toggle(\'active\',yes);this.textContent=yes?\'♥\':\'♡\';this.setAttribute(\'aria-pressed\',yes)">'
         +(fav?'♥':'♡')+'</button></div><a href="product.html?id='+p.id+'"><h3>'+p.name+'</h3></a>'+
