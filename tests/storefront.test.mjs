@@ -60,3 +60,97 @@ test('checkout, favorites and cart remain available',()=>{
     assert.ok(existsSync(resolve(root,page)));
   }
 });
+
+test('premium store and discovery pages have their complete local assets',()=>{
+  for(const page of pages){
+    const html=read('public/'+page+'.html');
+    assert.match(html,/href="showcase\.css"/);
+    assert.match(html,/src="showcase\.js"/);
+  }
+  for(const page of ['discover','compare']){
+    const html=read('public/'+page+'.html');
+    assert.match(html,/<html\b[^>]*lang="ar"[^>]*dir="rtl"/);
+    assert.match(html,/href="showcase\.css"/);
+    assert.match(html,/src="store-data\.js"/);
+    assert.match(html,/src="showcase\.js"/);
+    assert.match(html,/<main\b/);
+  }
+  for(const file of ['public/showcase.js','public/store-experience.js']){
+    assert.doesNotThrow(()=>new Script(read(file),{filename:file}));
+  }
+  assert.ok(read('public/showcase.css').includes('prefers-reduced-motion'));
+});
+
+function appHarness(page){
+  const map=new Map();
+  const storage={
+    getItem:key=>map.has(key)?map.get(key):null,
+    setItem:(key,val)=>map.set(key,String(val)),
+    removeItem:key=>map.delete(key)
+  };
+  const stubs=[];
+  const element=(tag='div')=>({
+    tagName:tag.toUpperCase(),
+    style:{},children:[],dataset:{},textContent:'',innerHTML:'',
+    classList:{add(){},remove(){},toggle(){}},
+    setAttribute(){},removeAttribute(){},
+    addEventListener(type,fn){this['on'+type]=fn;},
+    appendChild(child){this.children.push(child);},
+    querySelector(){return element('span');},
+    closest(){return null;},
+    scrollIntoView(){}
+  });
+  const stage=element('section'),bar=element('div'),compare=element('section');
+  const select=element('select'),addButton=element('button');
+  const mapping={
+    '#lab-stage':page==='discover'?stage:null,
+    '#lab-progress':page==='discover'?bar:null,
+    '#compare-content':page==='compare'?compare:null,
+    '#compare-product-select':page==='compare'?select:null,
+    '#compare-add':page==='compare'?addButton:null
+  };
+  const document={
+    body:element('body'),
+    querySelector:s=>mapping[s]||null,
+    querySelectorAll:()=>[],
+    createElement:tag=>element(tag)
+  };
+  const scope={
+    document,localStorage:storage,location:{pathname:'/'+page+'.html'},
+    MutationObserver:class{observe(){}},
+    setTimeout:()=>1,clearTimeout(){},
+    URLSearchParams,console
+  };
+  scope.window=scope;
+  runInNewContext(read('public/store-data.js'),scope);
+  runInNewContext(read('public/showcase.js'),scope);
+  return {scope,stage,bar,compare,select,addButton,map};
+}
+function fakeClick(value) {
+  return {target:{closest(selector){
+    if(selector==='.lab-opt')return {dataset:{value}};
+    return null;
+  }}};
+}
+test('guided discovery traverses all three choices and yields real products',()=>{
+  const app=appHarness('discover');
+  assert.match(app.stage.innerHTML,/ما المجال الذي يهمك/);
+  app.stage.onclick(fakeClick('skin'));
+  assert.match(app.stage.innerHTML,/ترطيب ونعومة/);
+  app.stage.onclick(fakeClick('0'));
+  assert.match(app.stage.innerHTML,/كيف تحب تبدأ/);
+  app.stage.onclick(fakeClick('set'));
+  assert.match(app.stage.innerHTML,/lab-product/);
+  assert.match(app.stage.innerHTML,/أفيورا|كريم|مورّدة|صابونة|النيلة/);
+  assert.equal(app.bar.style.width,'100%');
+});
+test('comparison board adds a real product and renders descriptions',()=>{
+  const app=appHarness('compare');
+  assert.match(app.compare.innerHTML,/ابدأ المقارنة/);
+  app.select.value='1';
+  app.addButton.onclick();
+  assert.match(app.compare.innerHTML,/بخاخ أمان/);
+  assert.match(app.compare.innerHTML,/طريقة الاستخدام/);
+  assert.match(app.compare.innerHTML,/تُؤكَّد عند التواصل/);
+  assert.deepEqual(JSON.parse(app.map.get('umTurkiCompareV1')),[1]);
+});
