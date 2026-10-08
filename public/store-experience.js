@@ -39,7 +39,7 @@
   // Instant, keyboard-friendly product suggestions on the home page.
   const input = $('#homeSearch');
   if (input && products.length) {
-    const wrapper = input.closest('.home-search');
+    const wrapper = input.closest('.home-search, .simple-search');
     wrapper.style.position = 'relative';
     const list = document.createElement('div');
     list.id = 'um-search-results';
