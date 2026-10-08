@@ -154,3 +154,79 @@ test('comparison board adds a real product and renders descriptions',()=>{
   assert.match(app.compare.innerHTML,/عند التواصل مع المتجر/);
   assert.deepEqual(JSON.parse(app.map.get('umTurkiCompareV1')),[1]);
 });
+
+
+test('new streamlined paths are styled, accessible, and retain the full shopping flow',()=>{
+  const homepage=read('public/index.html');
+  const discovery=read('public/discover.html');
+  assert.match(homepage,/href="flow\.css"/);
+  assert.match(homepage,/href="categories\.html"/);
+  assert.match(homepage,/href="cart\.html"/);
+  assert.match(homepage,/href="discover\.html"/);
+  assert.match(homepage,/id="homeSearch"/);
+  assert.match(homepage,/class="simple-hero"/);
+  assert.match(discovery,/href="easy-discover\.css"/);
+  assert.match(discovery,/src="easy-discover\.js"/);
+  assert.match(discovery,/id="easy-categories"/);
+  assert.match(discovery,/id="easy-query"/);
+  assert.match(discovery,/id="grid"/);
+  assert.doesNotMatch(discovery,/id="lab-stage"/);
+  for (const asset of ['flow.css','easy-discover.css','easy-discover.js']){
+    assert.ok(existsSync(resolve(root,'public',asset)),'missing '+asset);
+  }
+  assert.match(read('public/flow.css'),/prefers-reduced-motion/);
+  assert.match(read('public/easy-discover.css'),/prefers-reduced-motion/);
+  assert.doesNotThrow(()=>new Script(read('public/easy-discover.js')));
+  assert.match(read('public/store-experience.js'),/\.simple-search/);
+});
+
+test('one-tap discovery renders real products and filters instantly',()=>{
+  const nodes=new Map();
+  const makeNode=(tag='div')=>({
+    tagName:tag.toUpperCase(),dataset:{},children:[],textContent:'',innerHTML:'',
+    hidden:false,value:'',style:{},attributes:{},
+    setAttribute(k,v){this.attributes[k]=String(v);},
+    replaceChildren(...items){this.children=[...items];},
+    append(...items){this.children.push(...items);},
+    appendChild(item){this.children.push(item);},
+    prepend(item){this.children.unshift(item);},
+    addEventListener(k,fn){this['on'+k]=fn;},
+    closest(){return null;}
+  });
+  for(const id of ['grid','easy-categories','easy-interests','easy-query','easy-result-title',
+                   'easy-result-hint','easy-result-count','easy-more','easy-show-more']){
+    nodes.set(id,makeNode(id==='easy-query'?'input':'div'));
+  }
+  const memory=new Map();
+  const localStorage={
+    getItem:k=>memory.get(k)??null,
+    setItem:(k,v)=>memory.set(k,String(v)),removeItem:k=>memory.delete(k)
+  };
+  const document={
+    getElementById:id=>nodes.get(id)||null,
+    querySelectorAll:()=>[],
+    createElement:makeNode,
+    createTextNode:txt=>({textContent:txt})
+  };
+  const scope={document,localStorage,location:{search:'',pathname:'/discover.html'},
+               URLSearchParams,setTimeout:()=>1};
+  scope.window=scope;
+  runInNewContext(read('public/store-data.js'),scope);
+  runInNewContext(read('public/easy-discover.js'),scope);
+  const grid=nodes.get('grid'),cats=nodes.get('easy-categories'),search=nodes.get('easy-query');
+  const count=nodes.get('easy-result-count');
+  assert.match(grid.innerHTML,/product-img/);
+  assert.match(count.textContent,/منتج/);
+  assert.equal(cats.children.length,Object.keys(scope.storeCategories).length+1);
+  cats.onclick({target:{closest:s=>s==='button[data-cat]'?{dataset:{cat:'hair'}}:null}});
+  assert.match(nodes.get('easy-result-title').textContent,/الشعر/);
+  assert.match(grid.innerHTML,/شعر|مشاط|زيت|شامبو/);
+  search.value='مشاط';
+  search.oninput();
+  assert.match(grid.innerHTML,/مشاط/);
+  assert.ok(Number.parseInt(count.textContent)>=1);
+  search.value='';
+  search.oninput();
+  grid.onclick({target:{closest:s=>s==='button[data-add-id]'?{dataset:{addId:'15'},textContent:'',isConnected:true}:null}});
+  assert.ok(scope.getCart().some(x=>x.id===15));
+});
