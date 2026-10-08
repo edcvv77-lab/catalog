@@ -1,0 +1,256 @@
+/*
+ * Um Turki — responsive product art direction.
+ * Original product images are kept intact; full images remain on detail pages.
+ * Store/category cards use a deliberate crop to avoid tiny portrait flyers
+ * floating in wide empty rectangles on small screens.
+ */
+
+/* Category cards: editorial covers with a clear label overlay */
+.simple-home .simple-category {
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  aspect-ratio: .88;
+  min-height:0;
+  background:#d5e3d4;
+  border:1px solid rgba(28,78,47,.1);
+  border-radius:21px;
+  overflow:hidden;
+  box-shadow:0 12px 26px rgba(19,63,35,.09);
+  transition:transform .26s ease,box-shadow .26s ease;
+}
+.simple-home .simple-category > img {
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  padding:0;
+  object-fit:cover;
+  object-position:center 57%;
+  background:#e6eddf;
+  filter:saturate(1.06) contrast(1.03);
+  transform:scale(1.02);
+  transition:transform .42s ease,filter .42s ease;
+}
+.simple-home .simple-category::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to bottom,
+    rgba(13,40,24,0) 28%,
+    rgba(12,43,26,.06) 41%,
+    rgba(10,37,23,.64) 72%,
+    rgba(10,35,20,.94) 100%);
+}
+.simple-home .simple-category > span {
+  position:relative;
+  z-index:2;
+  padding:18px 15px 17px;
+  gap:6px;
+  background:none;
+  color:#fff;
+  text-shadow:0 1px 10px rgba(0,0,0,.25);
+}
+.simple-home .simple-category strong {
+  color:#fff;
+  font-weight:800;
+  font-size:clamp(13px,1.5vw,17px);
+  line-height:1.4;
+}
+.simple-home .simple-category small {
+  color:#e8f3e5;
+  font-size:11px;
+}
+.simple-home .simple-category:hover,
+.simple-home .simple-category:focus-visible {
+  transform:translateY(-5px);
+  box-shadow:0 20px 38px rgba(19,63,35,.2);
+}
+.simple-home .simple-category:hover > img,
+.simple-home .simple-category:focus-visible > img { transform:scale(1.085); }
+
+/* Place the subject, rather than the poster's headline, in the visible crop. */
+.simple-home .simple-category:nth-child(1) > img {object-position:center 61%}
+.simple-home .simple-category:nth-child(2) > img {object-position:center 64%}
+.simple-home .simple-category:nth-child(3) > img {object-position:center 58%}
+.simple-home .simple-category:nth-child(4) > img {object-position:center 54%}
+.simple-home .simple-category:nth-child(5) > img {object-position:center 58%}
+
+/* The category browser should show *all* options instead of hiding
+   some off-screen inside a horizontal carousel. */
+.cat-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  overflow:visible;
+  margin-bottom:27px;
+}
+.cat-grid .cat-card {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  isolation:isolate;
+  overflow:hidden;
+  min-width:0;
+  min-height:205px;
+  aspect-ratio:1.32;
+  border-radius:19px;
+  background:#e0eade;
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.cat-grid .cat-card > img,
+.cat-grid .cat-card > .cat-all-art {
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:100%;
+  padding:0;
+  border-radius:0;
+  object-fit:cover;
+  object-position:center 61%;
+  background:#dbe9dc;
+  transition:transform .3s ease;
+}
+.cat-grid .cat-card > .cat-all-art {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-size:62px;
+  color:#214f35;
+  background:radial-gradient(circle at 25% 25%,#f1e4c1,#c4dfc5 72%,#96c2a2);
+}
+.cat-grid .cat-card > .cat-all-art small {font-size:13px;color:#39644b}
+.cat-grid .cat-card::after {
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:30% 0 0;
+  pointer-events:none;
+  background:linear-gradient(transparent,rgba(9,39,22,.9));
+}
+.cat-grid .cat-card > div {
+  position:relative;
+  z-index:2;
+  background:none;
+  padding:17px 15px;
+  text-shadow:0 1px 9px rgba(0,0,0,.22);
+}
+.cat-grid .cat-card b {color:#fff;font-size:16px;line-height:1.45}
+.cat-grid .cat-card small {color:#e7f1e8;font-size:12px;margin-top:5px}
+.cat-grid .cat-card.active {outline:3px solid #d7bd80;outline-offset:-3px}
+.cat-grid .cat-card:hover,
+.cat-grid .cat-card:focus-visible {transform:translateY(-4px);box-shadow:0 14px 32px rgba(21,73,41,.15)}
+.cat-grid .cat-card:hover > img {transform:scale(1.065)}
+
+/* Product listing thumbnails: useful, enlarged crop inside a stable square.
+   The item title is outside the image and remains legible. */
+.simple-home .product .product-img,
+.easy-page .product .product-img,
+body:not(.simple-home) .products .product .product-img {
+  height:auto;
+  aspect-ratio:1 / 1;
+  background:#edf1e8;
+  overflow:hidden;
+}
+.simple-home .product .product-img img,
+.easy-page .product .product-img img,
+body:not(.simple-home) .products .product .product-img img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 57%;
+  transition:transform .35s ease;
+}
+.simple-home .product:hover .product-img img,
+.easy-page .product:hover .product-img img,
+body:not(.simple-home) .products .product:hover .product-img img {
+  transform:scale(1.045);
+}
+/* Product details and cart miniatures always show the ENTIRE image. */
+.product-detail .detail-img img,
+.cart-row img,
+.order-mini-item img {
+  object-fit:contain;
+}
+.simple-home .simple-hero-image {
+  isolation:isolate;
+  background:radial-gradient(circle,#fbf2d8 0%,#d7c29a 90%);
+}
+.simple-home .simple-hero-image img {
+  width:min(94%,430px);
+  height:min(93%,415px);
+  object-fit:cover;
+  object-position:center 53%;
+  border-radius:14px;
+  box-shadow:0 16px 38px rgba(41,49,25,.22);
+  filter:none;
+}
+.simple-home .simple-image-label {z-index:4}
+@media(max-width:900px){
+  .cat-grid {grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cat-grid .cat-card {min-height:155px}
+}
+@media(max-width:650px){
+  /* Two complete cards per row are easier to understand than clipped carousels. */
+  .simple-home .simple-category-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    overflow:visible;
+    padding:0;
+    scroll-snap-type:none;
+  }
+  .simple-home .simple-category {
+    width:auto;
+    min-width:0;
+    flex:auto;
+    aspect-ratio:.91;
+    border-radius:17px;
+  }
+  .simple-home .simple-category > img {height:100%}
+  .simple-home .simple-category > span {padding:14px 12px 15px}
+  .simple-home .simple-category strong {font-size:13px}
+  .simple-home .simple-category small {font-size:10px}
+  .cat-grid {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    overflow:visible;
+  }
+  .cat-grid .cat-card {
+    width:auto;
+    min-width:0;
+    flex:auto;
+    min-height:0;
+    aspect-ratio:.97;
+    scroll-snap-align:none;
+  }
+  .cat-grid .cat-card > img {height:100%}
+  .cat-grid .cat-card > div {padding:13px 12px}
+  .cat-grid .cat-card b {font-size:12.5px}
+  .cat-grid .cat-card small {font-size:10px}
+  .cat-grid .cat-card > .cat-all-art {font-size:39px}
+  .simple-home .simple-hero-image img {
+    width:min(95%,290px);
+    height:100%;
+    object-fit:cover;
+    object-position:center 51%;
+    border-radius:0;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .simple-home .simple-category,
+  .simple-home .simple-category > img,
+  .cat-grid .cat-card,
+  .cat-grid .cat-card > img,
+  .product-img img {transition:none!important}
+}
