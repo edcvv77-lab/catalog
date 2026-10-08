@@ -164,7 +164,7 @@ test('new streamlined paths are styled, accessible, and retain the full shopping
   assert.match(homepage,/href="cart\.html"/);
   assert.match(homepage,/href="discover\.html"/);
   assert.match(homepage,/id="homeSearch"/);
-  assert.match(homepage,/class="simple-hero"/);
+  assert.match(homepage,/class="[^"]*simple-hero[^"]*"/);
   assert.match(discovery,/href="easy-discover\.css"/);
   assert.match(discovery,/src="easy-discover\.js"/);
   assert.match(discovery,/id="easy-categories"/);
