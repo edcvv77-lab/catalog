@@ -3,27 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#244c38">
+  <meta name="theme-color" content="#161922">
   <meta name="description" content="متجر أم تركي للعناية الطبيعية. اكتشف منتجات البشرة والشعر بسهولة وأرسل طلبك عبر واتساب.">
-  <title>متجر أم تركي | عنايتك الطبيعية ببساطة</title>
+  <title>متجر أم تركي | مشاهد من روتينك</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/products/arora-shampoo.webp" as="image" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="store-shared.css">
   <link rel="stylesheet" href="premium.css">
   <link rel="stylesheet" href="showcase.css">
   <link rel="stylesheet" href="flow.css">
-<link rel="stylesheet" href="card-images.css"></head>
-<body class="simple-home">
+  <link rel="stylesheet" href="card-images.css">
+  <link rel="stylesheet" href="atelier-home.css">
+  <link rel="stylesheet" href="cinema-store.css">
+</head>
+<body class="simple-home atelier cinema-shop">
   <div class="simple-announcement"><div class="wrap">
-    <span>🌿 منتجات مختارة للعناية الطبيعية</span>
-    <span>الأسعار والتوفر تُؤكَّد عبر واتساب</span>
+    <span>أم تركي <b aria-hidden="true">✧</b> عناية يومية</span>
+    <a href="https://wa.me/967776436212" target="_blank" rel="noopener">تأكيد السعر والتوفر عبر واتساب <span aria-hidden="true">↖</span></a>
   </div></div>
   <header class="simple-header">
     <div class="wrap simple-header-inner">
       <a class="simple-brand" href="index.html" aria-label="متجر أم تركي - الرئيسية">
-        <span class="simple-brand-mark" aria-hidden="true">✦</span>
-        <span>متجر أم تركي<small>عناية طبيعية</small></span>
+        <span class="simple-brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M20 31c0-12 4-18 12-22 0 8-4 14-12 16M20 28C12 26 8 21 8 14c7 1 11 5 12 11M20 22c-4-5-4-10 0-15 4 5 4 10 0 15Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>أم تركي<small>متجر العناية الطبيعية</small></span>
       </a>
       <form class="simple-search" action="categories.html" method="get" role="search">
         <span aria-hidden="true">⌕</span>
@@ -31,8 +35,8 @@
         <button type="submit" aria-label="ابحث">بحث</button>
       </form>
       <div class="simple-header-actions">
-        <a href="favorites.html" aria-label="المفضلة" title="المفضلة" class="simple-icon">♡</a>
-        <a href="cart.html" aria-label="سلة التسوق" title="سلة التسوق" class="simple-cart">🛒 <span>السلة</span> <span class="simple-count cart-count">0</span></a>
+        <a href="favorites.html" aria-label="المفضلة" title="المفضلة" class="simple-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5 4.5 13a4.5 4.5 0 0 1 6.4-6.4L12 7.7l1.1-1.1a4.5 4.5 0 0 1 6.4 6.4Z"/></svg></a>
+        <a href="cart.html" aria-label="سلة التسوق" title="سلة التسوق" class="simple-cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Zm4 1V6a3 3 0 0 1 6 0v3"/></svg> <span>السلة</span> <span class="simple-count cart-count">0</span></a>
       </div>
     </div>
     <nav class="simple-desktop-nav wrap" aria-label="التنقل الرئيسي">
@@ -46,59 +50,131 @@
   </header>
 
   <main>
-    <section class="wrap simple-hero" aria-label="ابدأ التسوق">
-      <div class="simple-hero-content">
-        <span class="simple-eyebrow">🌱 أهلاً بك في متجر أم تركي</span>
-        <h1>عنايتك الطبيعية<br><em>بكل بساطة.</em></h1>
-        <p>منتجات البشرة والشعر والعناية اليومية في مكان واحد. اختر ما يعجبك، أضفه للسلة، وأرسل طلبك عبر واتساب.</p>
-        <div class="simple-hero-actions">
-          <a class="btn" href="categories.html">تسوق المنتجات <span aria-hidden="true">←</span></a>
-          <a class="simple-text-link" href="discover.html">لست متأكدًا؟ ساعدني أختار</a>
+    <section class="store-film" aria-label="مشاهد العناية من أم تركي">
+      <div class="film-stage">
+        <div class="film-veil film-hair" aria-hidden="true"></div>
+        <div class="film-veil film-skin" aria-hidden="true"></div>
+        <div class="film-glow" aria-hidden="true"></div>
+        <div class="film-art" aria-hidden="true">
+          <svg class="atelier-art" viewBox="0 0 620 540">
+          <defs>
+            <radialGradient id="light"><stop stop-color="#f0ce8e" stop-opacity=".64"/><stop offset="1" stop-color="#dfbd77" stop-opacity="0"/></radialGradient>
+            <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e5c997"/><stop offset="1" stop-color="#8c6941"/></linearGradient>
+            <clipPath id="arora-cut"><path d="M60 32 Q79 25 98 30 Q103 32 104 36 L104 61 Q104 68 111 74 Q121 84 122 100 L123 263 Q123 274 114 278 Q86 285 59 277 Q49 274 48 264 L47 101 Q47 88 54 78 Q60 69 60 62Z"/></clipPath>
+            <clipPath id="soap-cut"><path d="M134 112 Q151 103 194 103 Q236 102 253 110 L256 138 Q260 146 263 156 L266 249 Q265 269 242 278 Q184 286 141 273 Q129 267 128 251 L128 160 Q128 150 135 142Z"/></clipPath>
+            <clipPath id="herb-cut"><path d="M220 42 Q232 39 240 43 L242 72 Q245 81 249 87 Q254 95 255 109 L255 222 Q252 238 230 240 Q202 239 197 225 L196 113 Q196 99 205 92 Q215 84 216 73Z"/></clipPath>
+          </defs>
+          <circle cx="315" cy="240" r="245" fill="url(#light)"/>
+          <path d="M112 407V238a203 203 0 0 1 406 0v169M128 407V238a187 187 0 0 1 374 0v169" fill="none" stroke="#f6dfab" stroke-opacity=".5"/>
+          <g fill="none" stroke="#f3dba6" stroke-opacity=".55" stroke-width="1.4">
+            <path d="M104 400c-10-80-22-125-64-174m49 109c-34-1-53-18-64-41 23-2 46 9 61 30m-9-21c-7-27-7-53 6-73 12 26 13 48-2 69m418 125c23-81 51-115 91-154m-66 97c28-1 49-14 68-37-24-4-44 6-61 20m22-32c0-29 11-54 30-71 3 28-5 52-27 70"/>
+          </g>
+          <g class="atelier-plinth">
+            <ellipse cx="315" cy="472" rx="235" ry="42" fill="#0c2119" opacity=".48"/>
+            <path d="M107 425h228v52c0 21-228 21-228 0Z" fill="#845f3b"/>
+            <ellipse cx="221" cy="425" rx="114" ry="25" fill="url(#stone)"/>
+            <path d="M278 445h244v41c0 24-244 24-244 0Z" fill="#97764d"/>
+            <ellipse cx="400" cy="445" rx="122" ry="29" fill="url(#stone)"/>
+          </g>
+          <g class="atelier-pack pack-herb">
+            <g transform="translate(201 82) scale(1.43)"><image href="assets/products/nada-herbs-spray.webp" width="280" height="420" clip-path="url(#herb-cut)"/></g>
+          </g>
+          <g class="atelier-pack pack-arora">
+            <g transform="translate(59 20) scale(1.42)"><image href="assets/products/arora-shampoo.webp" width="280" height="420" clip-path="url(#arora-cut)"/></g>
+          </g>
+          <g class="atelier-pack pack-soap">
+            <g transform="translate(162 174) scale(1.02)"><image href="assets/products/afiura-licorice-soap.webp" width="280" height="374" clip-path="url(#soap-cut)"/></g>
+          </g>
+          </svg>
         </div>
-        <div class="simple-hero-note">✓ طلب سهل &nbsp; ✓ أسعار مؤكدة عند التواصل &nbsp; ✓ توصيل حسب المنطقة</div>
-      </div>
-      <div class="simple-hero-image">
-        <div class="simple-image-circle" aria-hidden="true"></div>
-        <img src="assets/products/afiura-soap-collection.webp" alt="منتجات أفيورا للعناية الطبيعية من متجر أم تركي" width="420" height="420" fetchpriority="high">
-        <span class="simple-image-label">منتجات من كتالوج المتجر</span>
+        <div class="film-words">
+          <article class="film-copy film-opening">
+            <p class="film-tag"><i></i> متجر أم تركي / ٠١</p>
+            <h1 id="homeTitle">عناية تبدأ <em>منكِ.</em></h1>
+            <p>تصفّحي منتجات الشعر والبشرة والعناية اليومية، واختاري ما يناسب روتينك.</p>
+            <div class="film-actions">
+              <a class="film-cta" href="categories.html">تسوّقي الكتالوج <b aria-hidden="true">←</b></a>
+              <a class="film-link" href="#film-hair" data-stop=".47">المشهد التالي <span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+          <article class="film-copy film-second" id="film-hair">
+            <p class="film-tag"><i></i> الشعر وفروة الرأس / ٠٢</p>
+            <h2>من أول<br><em>خطوة.</em></h2>
+            <p>اكتشفي شامبو أروارا وبخاخ ندى الأعشاب ضمن مجموعة العناية بالشعر.</p>
+            <div class="film-actions">
+              <a class="film-cta" href="categories.html?cat=hair">تسوّقي العناية بالشعر <b aria-hidden="true">←</b></a>
+            </div>
+          </article>
+          <article class="film-copy film-third" id="film-skin">
+            <p class="film-tag"><i></i> البشرة والجمال / ٠٣</p>
+            <h2>وقتٌ صغير<br><em>لكِ.</em></h2>
+            <p>تصفّحي صابون أفيورا ومنتجات العناية اليومية بالبشرة.</p>
+            <div class="film-actions">
+              <a class="film-cta" href="categories.html?cat=skin">تسوّقي العناية بالبشرة <b aria-hidden="true">←</b></a>
+            </div>
+          </article>
+        </div>
+        <nav class="film-track" aria-label="مشاهد المتجر" hidden>
+          <span class="film-status">عناية يومية</span><i aria-hidden="true"></i>
+          <button type="button" data-stop="0" aria-label="مشهد العناية اليومية" aria-current="step">01</button>
+          <button type="button" data-stop=".47" aria-label="مشهد العناية بالشعر">02</button>
+          <button type="button" data-stop=".91" aria-label="مشهد العناية بالبشرة">03</button>
+          <a href="#departments" aria-label="انتقلي إلى أقسام المتجر">↓</a>
+        </nav>
       </div>
     </section>
 
-    <section class="wrap simple-steps" aria-label="طريقة الطلب">
-      <div><span>١</span><p><strong>تصفح المنتجات</strong><small>اختر المنتجات التي تريدها</small></p></div>
-      <div><span>٢</span><p><strong>أضف للسلة</strong><small>راجع طلبك وكمياته</small></p></div>
-      <div><span>٣</span><p><strong>أرسل عبر واتساب</strong><small>نؤكد السعر والتوصيل معك</small></p></div>
-    </section>
-
-    <section class="wrap simple-section" aria-labelledby="categoryTitle">
-      <div class="simple-section-heading">
-        <div><span class="simple-section-kicker">ابدأ من هنا</span><h2 id="categoryTitle">تسوق حسب القسم</h2><p>اختر القسم الذي يناسب اهتمامك.</p></div>
-        <a href="categories.html">كل الأقسام ←</a>
+    <section class="wrap atelier-section" id="departments" aria-labelledby="categoryTitle">
+      <div class="atelier-heading">
+        <div><p class="atelier-kicker"><i></i> اكتشفي الأقسام</p><h2 id="categoryTitle">شنو تحتاجين اليوم؟</h2></div>
+        <a class="atelier-more" href="categories.html">كل المنتجات <span aria-hidden="true">↖</span></a>
       </div>
-      <div class="simple-category-grid" id="homeCats"></div>
+      <div class="atelier-categories" id="homeCats"></div>
     </section>
 
-    <section class="wrap simple-section" aria-labelledby="featuredTitle">
-      <div class="simple-section-heading">
-        <div><span class="simple-section-kicker">الأكثر بروزًا</span><h2 id="featuredTitle">منتجات مختارة</h2><p>تعرّف على مجموعة من منتجاتنا.</p></div>
-        <a href="categories.html">عرض جميع المنتجات ←</a>
+    <section class="atelier-featured" aria-labelledby="featuredTitle">
+      <div class="wrap atelier-section">
+        <div class="atelier-heading">
+          <div><p class="atelier-kicker"><i></i> مختارات أم تركي</p><h2 id="featuredTitle">من رفّ العناية.</h2></div>
+          <a class="atelier-more" href="categories.html">عرض الكل <span aria-hidden="true">↖</span></a>
+        </div>
+        <div class="featured-tools" id="featuredTools" hidden>
+          <div class="featured-filters" role="group" aria-label="تصفية المنتجات المختارة"></div>
+          <p class="featured-count" aria-live="polite"></p>
+        </div>
+        <div class="featured-grid" id="featured"></div>
       </div>
-      <div class="featured-grid" id="featured"></div>
     </section>
 
-    <section class="wrap simple-help" aria-label="المساعدة على اختيار المنتج">
+    <section class="wrap atelier-guide" aria-labelledby="guideTitle">
+      <div class="guide-copy">
+        <p class="atelier-kicker"><i></i> بداية تناسب احتياجك</p>
+        <h2 id="guideTitle">محتارة من وين تبدئين؟</h2>
+        <p>اختاري الشعر أو البشرة أو العناية اليومية، وشوفي المنتجات المرتبطة باهتمامك.</p>
+        <a class="atelier-cta" href="discover.html">ساعديني أختار <span aria-hidden="true">←</span></a>
+      </div>
+      <svg class="guide-mark" viewBox="0 0 260 220" fill="none" aria-hidden="true">
+        <circle cx="130" cy="110" r="97"/><circle cx="130" cy="110" r="85" stroke-dasharray="2 6"/>
+        <path d="M130 165c0-56 23-84 63-103-1 44-31 68-63 76m0 16c-40-7-59-30-62-69 38 4 58 24 62 60m0-37c-18-21-18-43 0-66 18 23 18 45 0 66"/>
+      </svg>
+    </section>
+
+    <section class="wrap atelier-order" aria-labelledby="orderTitle">
       <div>
-        <span class="simple-section-kicker">تحتاج مساعدة؟</span>
-        <h2>محتار من أين تبدأ؟</h2>
-        <p>اختر اهتمامك وشاهد المنتجات المرتبطة به في خطوة واحدة.</p>
+        <p class="atelier-kicker"><i></i> من الاختيار إلى الطلب</p>
+        <h2 id="orderTitle">كيف تطلبين؟</h2>
       </div>
-      <a class="btn" href="discover.html">ساعدني أختار ←</a>
+      <ol>
+        <li><span>٠١</span><strong>اختاري منتجاتك</strong><small>تصفّحي الأقسام أو ابحثي عن منتج.</small></li>
+        <li><span>٠٢</span><strong>راجعي السلة</strong><small>تأكّدي من المنتجات والكميات.</small></li>
+        <li><span>٠٣</span><strong>أرسلي الطلب عبر واتساب</strong><small>نؤكّد لك السعر والتوفر والتوصيل.</small></li>
+      </ol>
     </section>
   </main>
   <footer class="simple-footer">
     <div class="wrap simple-footer-inner">
       <div><strong>متجر أم تركي</strong><p>عناية طبيعية، وتجربة تسوق واضحة وسهلة.</p></div>
-      <div><a href="about.html">عن المتجر</a><a href="tel:776436212">اتصل بنا</a><a href="https://wa.me/967776436212" target="_blank" rel="noopener">واتساب</a></div>
+      <div><a href="about.html">عن المتجر</a><a href="about.html#faq">كيف أطلب؟</a><a href="compare.html">مقارنة المنتجات</a><a href="https://wa.me/967776436212" target="_blank" rel="noopener">واتساب</a></div>
     </div>
   </footer>
   <nav class="simple-mobile-nav" aria-label="التنقل السريع">
@@ -109,22 +185,57 @@
   </nav>
   <script src="store-data.js"></script>
   <script>
+    const featuredProducts=storeProducts.filter(p=>p.featured).slice(0,8);
     function card(p){
       const fav=getFav().includes(p.id);
-      return '<article class="product"><div class="product-img"><a href="product.html?id='+p.id+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"></a></div>'+
+      return '<article class="product" data-category="'+p.category+'"><div class="product-img product-art-'+p.slug+'"><a href="product.html?id='+p.id+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"></a></div>'+
         '<div class="product-body"><div class="simple-product-top"><span>'+categoryName(p.category)+'</span>'+
         '<button type="button" class="heart '+(fav?'active':'')+'" aria-label="المفضلة: '+p.name+'" aria-pressed="'+fav+'" onclick="const yes=toggleFav('+p.id+');this.classList.toggle(\'active\',yes);this.textContent=yes?\'♥\':\'♡\';this.setAttribute(\'aria-pressed\',yes)">'
         +(fav?'♥':'♡')+'</button></div><a href="product.html?id='+p.id+'"><h3>'+p.name+'</h3></a>'+
         '<p class="product-short">'+p.short+'</p><div class="price-contact">'+priceText()+'</div>'+
         '<div class="product-actions-mini"><button type="button" class="btn" onclick="addToCart('+p.id+');this.textContent=\'تمت الإضافة ✓\'">أضف للسلة</button></div></div></article>';
     }
-    document.getElementById('homeCats').innerHTML=Object.entries(storeCategories).map(([key,c])=>
-      '<a class="simple-category" href="categories.html?cat='+key+'"><img src="'+c.image+'" alt="" loading="lazy">'+
-      '<span><strong>'+c.icon+' '+c.name+'</strong><small>'+storeProducts.filter(p=>p.category===key).length+' منتجات</small></span></a>'
+    const marks={
+      skin:'M12 3c-2 4-6 7-6 12a6 6 0 0 0 12 0c0-5-4-8-6-12Zm-3 13c0 1.5 1 2.5 2.5 3',
+      hair:'M5 21c2-7 7-10 13-14M6 18C2 9 8 4 21 3c0 10-5 15-13 14',
+      eyes:'M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Zm13 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+      personal:'M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6L12 2Z',
+      wellness:'M12 22v-8m-1 0C5 14 2 10 3 5c5 0 9 3 9 8m1 1c6 0 9-4 8-9-5 0-9 3-9 8'
+    };
+    const arabicNumber=new Intl.NumberFormat('ar',{numberingSystem:'arab'});
+    document.getElementById('homeCats').innerHTML=Object.entries(storeCategories).map(([key,c],i)=>
+      '<a class="department" href="categories.html?cat='+key+'" data-department="'+key+'"><span class="department-number">٠'+arabicNumber.format(i+1)+'</span>'+
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+marks[key]+'"/></svg><strong>'+c.name+'</strong><span class="department-bottom"><small>'+arabicNumber.format(storeProducts.filter(p=>p.category===key).length)+' منتجات</small><b aria-hidden="true">↖</b></span></a>'
     ).join('');
-    document.getElementById('featured').innerHTML=storeProducts.filter(p=>p.featured).slice(0,8).map(card).join('');
+    const grid=document.getElementById('featured');
+    grid.innerHTML=featuredProducts.map(card).join('');
+    const tools=document.getElementById('featuredTools');
+    const filters=tools.querySelector('.featured-filters');
+    const featuredCount=tools.querySelector('.featured-count');
+    function filterFeatured(category){
+      let visible=0;
+      for(const item of grid.children){
+        item.hidden=category!=='all'&&item.dataset.category!==category;
+        if(!item.hidden) visible++;
+      }
+      for(const option of filters.children) option.setAttribute('aria-pressed',String(option.dataset.filter===category));
+      featuredCount.textContent=arabicNumber.format(visible)+' من '+arabicNumber.format(featuredProducts.length)+' مختارات';
+    }
+    for(const category of ['all',...new Set(featuredProducts.map(p=>p.category))]){
+      const option=document.createElement('button');
+      option.type='button';
+      option.dataset.filter=category;
+      option.textContent=category==='all'?'الكل':categoryName(category);
+      option.setAttribute('aria-controls','featured');
+      option.addEventListener('click',()=>filterFeatured(category));
+      filters.appendChild(option);
+    }
+    tools.hidden=false;
+    filterFeatured('all');
   </script>
   <script src="store-experience.js" defer></script>
   <script src="showcase.js" defer></script>
+  <script src="cinema-store.js" defer></script>
+  <script src="product-art.js" defer></script>
 </body>
 </html>

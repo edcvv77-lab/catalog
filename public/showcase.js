@@ -373,6 +373,18 @@
   // Comparison board. Up to 3 real products, without claiming verified prices.
   const compareHost = $('#compare-content');
   const compareSelect = $('#compare-product-select');
+  const compareAdd = $('#compare-add');
+  const compareProgress = $('#compare-progress');
+  const displayNumber = new Intl.NumberFormat('ar',{numberingSystem:'arab'});
+  function syncCompareControls(chosen) {
+    if (!compareSelect || !compareAdd) return;
+    const ids = new Set(chosen.map(p => String(p.id)));
+    [...compareSelect.options].forEach(option => { option.disabled = ids.has(option.value); });
+    if (ids.has(compareSelect.value)) compareSelect.value = '';
+    compareSelect.disabled = chosen.length >= 3;
+    compareAdd.disabled = !compareSelect.value || compareSelect.disabled;
+    if (compareProgress) compareProgress.textContent = displayNumber.format(chosen.length) + ' من ٣ منتجات';
+  }
   if (compareSelect) {
     Object.entries(categories).forEach(([key,cat]) => {
       const group = document.createElement('optgroup');
@@ -385,15 +397,19 @@
       });
       compareSelect.appendChild(group);
     });
-    $('#compare-add').addEventListener('click', () => {
-      if (!compareSelect.value) {message('اختر منتجًا أولًا');return;}
-      toggleCompared(compareSelect.value);
+    compareSelect.addEventListener('change',() => syncCompareControls(readCompared().map(byId).filter(Boolean)));
+    compareAdd?.addEventListener('click', () => {
+      const id=compareSelect.value;
+      if (!id || compareAdd.disabled) return;
       compareSelect.value = '';
+      toggleCompared(id);
+      if (!compareSelect.disabled) compareSelect.focus();
     });
   }
   function renderComparison() {
     if (!compareHost) return;
     const chosen = readCompared().map(byId).filter(Boolean);
+    syncCompareControls(chosen);
     if (!chosen.length) {
       compareHost.innerHTML = '<div class="compare-grid-scroll compare-empty">' +
         '<strong>ابدأ المقارنة بمنتج واحد ✨</strong>' +
@@ -413,21 +429,21 @@
       ['استفسار وطلب',p => '<button class="btn" data-ask-id="' + p.id + '" type="button">اسأل عبر واتساب ↗</button>']
     ];
     const header = '<thead><tr><th scope="col">المعيار</th>' + chosen.map(p =>
-      '<td><div class="compare-product-header"><a href="product.html?id=' + p.id +
+      '<th scope="col"><div class="compare-product-header"><a href="product.html?id=' + p.id +
       '"><img src="' + escapeText(p.image) + '" alt="' + escapeText(p.name) + '"><b>' +
       escapeText(p.name) + '</b></a><button type="button" data-remove-id="' + p.id +
-      '">× إزالة من المقارنة</button></div></td>').join('') + '</tr></thead>';
+      '">× إزالة من المقارنة</button></div></th>').join('') + '</tr></thead>';
     const body = '<tbody>' + rows.map(([title,getCell]) =>
       '<tr><th scope="row">' + escapeText(title) + '</th>' +
       chosen.map(p => '<td>' + getCell(p) + '</td>').join('') + '</tr>').join('') + '</tbody>';
-    compareHost.innerHTML = '<div class="compare-grid-scroll"><table class="compare-table">' +
+    compareHost.innerHTML = '<div class="compare-grid-scroll" tabindex="0" role="region" aria-label="جدول المقارنة؛ يمكن تمريره أفقيًا"><table class="compare-table">' +
       header + body + '</table></div>' +
       '<p class="lab-disclaimer">اختر منتجًا إضافيًا من القائمة في الأعلى (حتى ثلاثة منتجات).</p>';
   }
   if (compareHost) {
     compareHost.addEventListener('click', event => {
       const remove = event.target.closest('[data-remove-id]');
-      if (remove) {toggleCompared(remove.dataset.removeId);return;}
+      if (remove) {toggleCompared(remove.dataset.removeId);compareSelect?.focus();return;}
       const ask = event.target.closest('[data-ask-id]');
       if (ask) window.productWhatsApp(ask.dataset.askId);
     });
