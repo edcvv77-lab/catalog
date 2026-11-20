@@ -8,6 +8,7 @@ import {runInNewContext, Script} from 'node:vm';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const read=p=>readFileSync(resolve(root,p),'utf8');
 const pages=['index','categories','product','cart','favorites','checkout','about'];
+const enhancedPages=pages.filter(page=>!['checkout','about'].includes(page));
 
 test('storefront pages reference new enhancement assets',()=>{
   assert.ok(existsSync(resolve(root,'public/premium.css')));
@@ -15,8 +16,11 @@ test('storefront pages reference new enhancement assets',()=>{
   for(const page of pages){
     const html=read('public/'+page+'.html');
     assert.match(html,/<html\b[^>]*lang="ar"[^>]*dir="rtl"/);
-    assert.match(html,/<link rel="stylesheet" href="premium\.css">/);
-    assert.match(html,/<script src="store-experience\.js" defer><\/script>/);
+    assert.match(html,/<link rel="stylesheet" href="store-shared\.css">/);
+    if(enhancedPages.includes(page)){
+      assert.match(html,/<link rel="stylesheet" href="premium\.css">/);
+      assert.match(html,/<script src="store-experience\.js" defer><\/script>/);
+    }
     assert.match(html,/<\/head>/);
     assert.match(html,/<\/body>/);
   }
@@ -62,7 +66,7 @@ test('checkout, favorites and cart remain available',()=>{
 });
 
 test('premium store and discovery pages have their complete local assets',()=>{
-  for(const page of pages){
+  for(const page of enhancedPages){
     const html=read('public/'+page+'.html');
     assert.match(html,/href="showcase\.css"/);
     assert.match(html,/src="showcase\.js"/);
@@ -72,7 +76,7 @@ test('premium store and discovery pages have their complete local assets',()=>{
     assert.match(html,/<html\b[^>]*lang="ar"[^>]*dir="rtl"/);
     assert.match(html,/href="showcase\.css"/);
     assert.match(html,/src="store-data\.js"/);
-    assert.match(html,/src="showcase\.js"/);
+    assert.match(html,/src="showcase\.js(?:\?[^"]*)?"/);
     assert.match(html,/<main\b/);
   }
   for(const file of ['public/showcase.js','public/store-experience.js']){
@@ -91,14 +95,14 @@ function appHarness(page){
   const stubs=[];
   const element=(tag='div')=>({
     tagName:tag.toUpperCase(),
-    style:{},children:[],dataset:{},textContent:'',innerHTML:'',
+    style:{},children:[],options:[],dataset:{},textContent:'',innerHTML:'',
     classList:{add(){},remove(){},toggle(){}},
     setAttribute(){},removeAttribute(){},
     addEventListener(type,fn){this['on'+type]=fn;},
     appendChild(child){this.children.push(child);},
     querySelector(){return element('span');},
     closest(){return null;},
-    scrollIntoView(){}
+    scrollIntoView(){},focus(){}
   });
   const stage=element('section'),bar=element('div'),compare=element('section');
   const select=element('select'),addButton=element('button');
@@ -148,6 +152,7 @@ test('comparison board adds a real product and renders descriptions',()=>{
   const app=appHarness('compare');
   assert.match(app.compare.innerHTML,/ابدأ المقارنة/);
   app.select.value='1';
+  app.select.onchange();
   app.addButton.onclick();
   assert.match(app.compare.innerHTML,/بخاخ أمان/);
   assert.match(app.compare.innerHTML,/طريقة الاستخدام/);
@@ -164,9 +169,11 @@ test('new streamlined paths are styled, accessible, and retain the full shopping
   assert.match(homepage,/href="cart\.html"/);
   assert.match(homepage,/href="discover\.html"/);
   assert.match(homepage,/id="homeSearch"/);
-  assert.match(homepage,/class="[^"]*simple-hero[^"]*"/);
+  assert.match(homepage,/class="store-film"/);
+  assert.match(homepage,/src="cinema-store\.js"/);
+  assert.match(homepage,/src="product-art\.js"/);
   assert.match(discovery,/href="easy-discover\.css"/);
-  assert.match(discovery,/src="easy-discover\.js"/);
+  assert.match(discovery,/src="easy-discover\.js(?:\?[^"]*)?"/);
   assert.match(discovery,/id="easy-categories"/);
   assert.match(discovery,/id="easy-query"/);
   assert.match(discovery,/id="grid"/);
@@ -191,7 +198,7 @@ test('one-tap discovery renders real products and filters instantly',()=>{
     appendChild(item){this.children.push(item);},
     prepend(item){this.children.unshift(item);},
     addEventListener(k,fn){this['on'+k]=fn;},
-    closest(){return null;}
+    closest(){return null;},querySelector(){return null;}
   });
   for(const id of ['grid','easy-categories','easy-interests','easy-query','easy-result-title',
                    'easy-result-hint','easy-result-count','easy-more','easy-show-more']){
@@ -208,15 +215,15 @@ test('one-tap discovery renders real products and filters instantly',()=>{
     createElement:makeNode,
     createTextNode:txt=>({textContent:txt})
   };
-  const scope={document,localStorage,location:{search:'',pathname:'/discover.html'},
-               URLSearchParams,setTimeout:()=>1};
+  const scope={document,localStorage,location:{search:'',pathname:'/discover.html',href:'https://store.example/discover.html'},
+               URL,URLSearchParams,history:{replaceState(){}},setTimeout:()=>1};
   scope.window=scope;
   runInNewContext(read('public/store-data.js'),scope);
   runInNewContext(read('public/easy-discover.js'),scope);
   const grid=nodes.get('grid'),cats=nodes.get('easy-categories'),search=nodes.get('easy-query');
   const count=nodes.get('easy-result-count');
   assert.match(grid.innerHTML,/product-img/);
-  assert.match(count.textContent,/منتج/);
+  assert.match(count.textContent,/النتائج/);
   assert.equal(cats.children.length,Object.keys(scope.storeCategories).length+1);
   cats.onclick({target:{closest:s=>s==='button[data-cat]'?{dataset:{cat:'hair'}}:null}});
   assert.match(nodes.get('easy-result-title').textContent,/الشعر/);
@@ -224,11 +231,25 @@ test('one-tap discovery renders real products and filters instantly',()=>{
   search.value='مشاط';
   search.oninput();
   assert.match(grid.innerHTML,/مشاط/);
-  assert.ok(Number.parseInt(count.textContent)>=1);
+  assert.match(count.textContent,/[١-٩]/);
   search.value='';
   search.oninput();
   grid.onclick({target:{closest:s=>s==='button[data-add-id]'?{dataset:{addId:'15'},textContent:'',isConnected:true}:null}});
   assert.ok(scope.getCart().some(x=>x.id===15));
+});
+
+test('checkout exposes an in-store review without automatically opening WhatsApp',()=>{
+  const html=read('public/checkout.html');
+  const code=read('public/checkout-review.js');
+  assert.match(html,/<form id="checkoutForm">/);
+  assert.match(html,/<dialog class="order-review"/);
+  assert.match(html,/name="phone"[^>]*inputmode="tel"/);
+  assert.match(html,/class="btn review-whatsapp" target="_blank" rel="noopener noreferrer"/);
+  assert.match(code,/dialog\.showModal\(\)/);
+  assert.doesNotMatch(code,/\bwindow\.open\s*\(|umTurkiCustomer/);
+  for(const file of ['checkout-review.js','cinema-store.js','cinema-commerce.js','catalog-departments.js','product-art.js']){
+    assert.doesNotThrow(()=>new Script(read('public/'+file),{filename:file}));
+  }
 });
 
 

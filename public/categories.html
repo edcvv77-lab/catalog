@@ -4,21 +4,39 @@
 .cat-all-art{height:125px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;background:radial-gradient(circle,#eaf5e6,#c9dfc8);color:#2a6542;font-size:35px;font-weight:800}.cat-all-art small{font-size:11px;color:#547e5b}.filter-row{display:none}.result-head{scroll-margin-top:100px}
 </style><link rel="stylesheet" href="premium.css"><link rel="stylesheet" href="showcase.css"><link rel="stylesheet" href="card-images.css"></head><body>
 <header class="site-header"><div class="wrap header-row"><a class="back" href="index.html">←</a><a class="brand" href="index.html"><span class="leaf">🌿</span><span>متجر أم تركي</span></a><a class="head-action" href="cart.html">🛒<span class="badge cart-count">0</span></a></div></header>
-<main class="wrap"><section class="page-hero"><h1>المنتجات والأقسام</h1><p>الكتالوج الحقيقي لمتجر أم تركي. جميع الأسعار يتم تأكيدها عند التواصل.</p></section>
-<label class="search"><span>⌕</span><input id="q" type="search" placeholder="ابحث عن منتج..." autocomplete="off"></label>
-<div class="cat-grid" id="catGrid"></div><div class="filter-row" id="chips"></div><div class="result-head"><div><h2 id="title">كل المنتجات</h2><span id="subtitle"></span></div><span id="count"></span></div><div class="products" id="grid"></div></main>
+<main class="wrap">
+  <section class="catalog-hero" aria-labelledby="catalogHeading">
+    <div class="catalog-copy">
+      <p class="catalog-kicker"><i></i><span id="catalogKicker">كتالوج أم تركي</span></p>
+      <h1 id="catalogHeading" tabindex="-1">كل خيارات العناية.</h1>
+      <p id="catalogIntro">تصفّحي منتجات أم تركي أو اختاري القسم المناسب لروتينك.</p>
+      <div class="catalog-actions">
+        <a class="catalog-cta" href="#catalogResults">تسوّقي المنتجات <span aria-hidden="true">↓</span></a>
+        <span id="catalogTotal"></span>
+      </div>
+    </div>
+    <div class="catalog-art" id="catalogArt" role="group" aria-label="منتجات من القسم"></div>
+  </section>
+  <section aria-labelledby="browseHeading" class="catalog-browse">
+    <header><h2 id="browseHeading">تصفّحي الأقسام</h2></header>
+    <nav class="cat-grid" id="catGrid" aria-label="أقسام المتجر"></nav>
+    <label class="search"><span aria-hidden="true">⌕</span><input id="q" type="search" aria-label="ابحثي عن منتج في الكتالوج" placeholder="ابحثي عن منتج..." autocomplete="off"></label>
+  </section>
+  <div class="result-head" id="catalogResults"><div><h2 id="title">كل المنتجات</h2><span id="subtitle"></span></div><span id="count" aria-live="polite"></span></div>
+  <div class="products" id="grid"></div>
+</main>
 <nav class="bottom"><a href="index.html"><span>⌂</span>الرئيسية</a><a class="active" href="categories.html"><span>▦</span>الأقسام</a><a href="cart.html"><span>🛒</span>السلة</a><a href="favorites.html"><span>♡</span>المفضلة</a><a href="about.html"><span>ⓘ</span>من نحن</a></nav>
 <script src="store-data.js"></script><script>
-const params=new URLSearchParams(location.search);let selected=params.get('cat')||'all';if(selected==='face'||selected==='herbs')selected='all';let query=params.get('q')||'';const q=document.getElementById('q');q.value=query;
+const params=new URLSearchParams(location.search);let selected=params.get('cat')||'all';if(!Object.hasOwn(storeCategories,selected))selected='all';let query=params.get('q')||'';const q=document.getElementById('q');q.value=query;
 function productCard(p){const fav=getFav().includes(p.id);return `<article class="product"><div class="product-img"><a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy"></a><button class="heart ${fav?'active':''}" onclick="const a=toggleFav(${p.id});this.classList.toggle('active',a);this.textContent=a?'♥':'♡'">${fav?'♥':'♡'}</button></div><div class="product-body"><a href="product.html?id=${p.id}"><h3>${p.name}</h3></a><p class="product-short">${p.short}</p><div class="price-contact">${priceText()}</div><div class="product-actions-mini"><button class="btn" onclick="addToCart(${p.id});this.textContent='تمت الإضافة ✓'">أضف للسلة</button><button class="btn alt ask-mini" title="اسأل عن السعر" onclick="productWhatsApp(${p.id})">💬</button></div></div></article>`}
 function drawCategories(){
   const total=storeProducts.length;
+  const format = new Intl.NumberFormat('ar',{numberingSystem:'arab'});
   document.getElementById('catGrid').innerHTML=
-    '<a class="cat-card '+(selected==='all'?'active':'')+'" href="categories.html" data-category="all"><span class="cat-all-art">✦<small>تسوق بسهولة</small></span><div><b>كل المنتجات</b><small>'+total+' منتج</small></div></a>'+
+    '<a class="catalog-category '+(selected==='all'?'active':'')+'" href="categories.html" data-category="all"'+(selected==='all'?' aria-current="true"':'')+'><strong>كل المنتجات</strong><small>'+format.format(total)+' منتجًا</small><b aria-hidden="true">↖</b></a>'+
     Object.entries(storeCategories).map(([k,c])=>
-      '<a class="cat-card '+(selected===k?'active':'')+'" href="?cat='+k+'" data-category="'+k+'"><img src="'+c.image+'" alt="'+c.name+'"><div><b>'+c.icon+' '+c.name+'</b><small>'+storeProducts.filter(p=>p.category===k).length+' منتجات</small></div></a>'
+      '<a class="catalog-category '+(selected===k?'active':'')+'" href="?cat='+k+'" data-category="'+k+'"'+(selected===k?' aria-current="true"':'')+'><strong>'+c.name+'</strong><small>'+format.format(storeProducts.filter(p=>p.category===k).length)+' منتجات</small><b aria-hidden="true">↖</b></a>'
     ).join('');
-  document.getElementById('chips').innerHTML='';
 }
 function changeCategory(next){
   if(next!=='all'&&!storeCategories[next])return;
@@ -27,14 +45,16 @@ function changeCategory(next){
   if(selected==='all')url.searchParams.delete('cat');else url.searchParams.set('cat',selected);
   history.replaceState(null,'',url.pathname+url.search);
   drawCategories();draw();
-  document.querySelector('.result-head').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+  document.dispatchEvent(new CustomEvent('catalog:category',{detail:selected}));
+  document.getElementById('catalogHeading').focus({preventScroll:true});
+  document.querySelector('.catalog-hero').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
 }
 document.getElementById('catGrid').addEventListener('click',e=>{
   const link=e.target.closest('a[data-category]');
-  if(!link)return;
+  if(!link||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
   e.preventDefault();
   changeCategory(link.dataset.category);
 });
 function draw(){const arr=storeSearch(query,selected);document.getElementById('title').textContent=selected==='all'?'كل المنتجات':categoryName(selected);document.getElementById('subtitle').textContent=selected==='all'?'تصفّح منتجات متجر أم تركي':storeCategories[selected]?.desc||'';document.getElementById('count').textContent=arr.length+' منتج';document.getElementById('grid').innerHTML=arr.length?arr.map(productCard).join(''):'<div class="empty" style="grid-column:1/-1">لا توجد نتائج مطابقة لبحثك.</div>'}
 q.addEventListener('input',e=>{query=e.target.value;draw()});drawCategories();draw();
-</script><script src="store-experience.js" defer></script><script src="showcase.js" defer></script></body></html>
+</script><script src="store-experience.js" defer></script><script src="showcase.js" defer></script><script src="cinema-commerce.js" defer></script><script src="catalog-departments.js" defer></script></body></html>

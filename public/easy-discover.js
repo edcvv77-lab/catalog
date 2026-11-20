@@ -13,6 +13,7 @@
   const count = document.getElementById('easy-result-count');
   const moreWrap = document.getElementById('easy-more');
   const moreBtn = document.getElementById('easy-show-more');
+  const numeric = new Intl.NumberFormat('ar',{numberingSystem:'arab'});
   const escapeHtml = text => String(text ?? '').replace(/[&<>"']/g, x =>
     ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[x]);
   const normalize = text => String(text ?? '').normalize('NFKD')
@@ -103,7 +104,6 @@
     return result;
   }
   function productCard(p) {
-    const fav = window.getFav().includes(p.id);
     return '<article class="product">' +
       '<div class="product-img"><a href="product.html?id='+Number(p.id)+'">'+
       '<img loading="lazy" src="'+escapeHtml(p.image)+'" alt="'+escapeHtml(p.name)+'"></a></div>' +
@@ -125,7 +125,7 @@
     resultTitle.textContent = title;
     resultHint.textContent = search.value.trim()?'نتائج بحثك تظهر هنا فورًا':
       interest>=0?'منتجات مرتبطة باهتمامك من وصف الكتالوج':'تصفح المنتجات واختر ما يعجبك.';
-    count.textContent = matches.length+' منتج';
+    count.textContent = 'النتائج: '+numeric.format(matches.length);
     if(!matches.length){
       grid.innerHTML='<div class="easy-empty"><h3>ما لقينا نتيجة مطابقة</h3><p>جرّب كلمة مختلفة، أو اعرض منتجات القسم كلها.</p><button type="button" class="btn alt" data-reset="true">عرض كل المنتجات</button></div>';
     }else{
@@ -133,13 +133,21 @@
     }
     moreWrap.hidden = matches.length<=shown;
   }
+  function syncCategory() {
+    const url = new URL(location.href);
+    if (category === 'all') url.searchParams.delete('cat');
+    else url.searchParams.set('cat',category);
+    history.replaceState(null,'',url.href);
+  }
   categoryBar.addEventListener('click',event=>{
     const btn=event.target.closest('button[data-cat]');
     if(!btn)return;
     category=btn.dataset.cat;
     interest=-1;
     shown=8;
+    syncCategory();
     render();
+    categoryBar.querySelector('[aria-pressed="true"]')?.focus({preventScroll:true});
   });
   interestBar.addEventListener('click',event=>{
     const btn=event.target.closest('button[data-goal]');
@@ -148,13 +156,16 @@
     interest=interest===next?-1:next;
     shown=8;
     render();
+    interestBar.querySelector('[aria-pressed="true"]')?.focus({preventScroll:true});
   });
   search.addEventListener('input',()=>{shown=8;render()});
   moreBtn.addEventListener('click',()=>{shown+=8;render()});
   grid.addEventListener('click',event=>{
     const reset=event.target.closest('[data-reset]');
     if(reset){
-      category='all';interest=-1;search.value='';shown=8;render();return;
+      category='all';interest=-1;search.value='';shown=8;syncCategory();render();
+      categoryBar.querySelector('[aria-pressed="true"]')?.focus();
+      return;
     }
     const add=event.target.closest('button[data-add-id]');
     if(!add)return;
